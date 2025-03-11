@@ -4,54 +4,91 @@
   align-items: center;
   background-color: white;
   border-radius: 15px;
-  overflow: hidden;
   height: 76vh;
   gap: 30px;
+  overflow: hidden;
 
   .login-image {
-    img {
-      width: 300px;
-    }
+    width: 50%;
+    overflow: hidden;
   }
 
-  .login-content {
-    width: 300px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 5px;
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    overflow: hidden;
 
-    .login-title {
-      font-family: "Jost", sans-serif;
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .login-input {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
+    .login-content {
+      width: 80%;
+      padding: 20px;
+      background-color: white;
       border-radius: 5px;
-    }
+      box-sizing: border-box; 
 
-    .login-button {
-      width: 100%;
-      padding: 10px;
-      background-color: #205781;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+      .login-title {
+        font-family: "Jost", sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: -5px;
+      }
 
-    .login-link {
-      text-align: center;
-      margin-top: 10px;
+      .login-subtitle {
+        font-family: "Jost", sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        margin-bottom: 20px;
+      }
 
-      a {
-        color: #205781;
-        text-decoration: none;
+      .input-label {
+        font-family: "Jost", sans-serif;
+        font-size: 12px;
+      }
+
+      .login-input {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        width: calc(100% - 2px); 
+      }
+
+      .login-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #205781;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 20px 0;
+      }
+
+      .create-account {
+        width: 100%;
+        padding: 10px;
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+
+      .login-link {
+        font-family: "Jost", sans-serif;
+        font-size: 12px;
+        text-align: center;
+        margin-top: 10px;
+        text-align: center;
+
+        a {
+          color: #205781;
+          text-decoration: none;
+        }
       }
     }
   }
