@@ -46,6 +46,14 @@ export class LoginPageComponent {
     this.toggleSpinner();
   }
 
+  protected onClickSignup() {
+    this.toggleSpinner();
+  }
+
+  protected onClickSendEmail() {
+    this.toggleSpinner();
+  }
+
   protected onClickGoToCreateOrLogin() {
     if (this.isCreateAccount) {
       this.buttonState = new Array(2).fill('normal');

@@ -7,44 +7,50 @@
       <h1 class="login-title">Sign In</h1>
       <h2 class="login-subtitle">Unlock your world.</h2>
 
-      <div class="label-flex">
-        <p class="input-label">Email</p>
-        <p class="required">*</p>
-      </div>
+      <form (submit)="onClickLogin()">
+        <div class="label-flex">
+          <p class="input-label">Email</p>
+          <p class="required">*</p>
+        </div>
+        <input
+          type="email"
+          class="login-input"
+          placeholder="Enter your email"
+          name="email"
+          autocomplete="email"
+          required
+          [@inputError]="errorState[0]"
+          (blur)="showError(0)"
+          required
+        />
 
-      <input
-        type="email"
-        class="login-input"
-        placeholder="Enter your email"
-        name="email"
-        [@inputError]="errorState[0]"
-        (blur)="showError(0)"
-      />
+        <div class="label-flex">
+          <p class="input-label">Password</p>
+          <p class="required">*</p>
+        </div>
+        <input
+          type="password"
+          class="login-input"
+          placeholder="Enter your password"
+          name="password"
+          autocomplete="current-password"
+          required
+          [@inputError]="errorState[1]"
+          (blur)="showError(1)"
+          required
+        />
 
-      <div class="label-flex">
-        <p class="input-label">Password</p>
-        <p class="required">*</p>
-      </div>
+        <button
+          type="submit"
+          class="login-button"
+          [@buttonHover]="buttonState[0]"
+          (mouseenter)="onButtonHover(0)"
+          (mouseleave)="onButtonLeave(0)"
+        >
+          Sign In
+        </button>
+      </form>
 
-      <input
-        type="password"
-        class="login-input"
-        placeholder="Enter your password"
-        name="password"
-        [@inputError]="errorState[1]"
-        (blur)="showError(1)"
-      />
-
-      <button
-        class="login-button"
-        [@buttonHover]="buttonState[0]"
-        (click)="onClickLogin()"
-        (keypress)="onClickLogin()"
-        (mouseenter)="onButtonHover(0)"
-        (mouseleave)="onButtonLeave(0)"
-      >
-        Sign In
-      </button>
       <button
         class="create-account"
         [@buttonHover]="buttonState[1]"
@@ -67,6 +73,7 @@
     </div>
   </div>
 </div>
+
 <div class="signup-container" *ngIf="isCreateAccount && !isForgotPassword">
   <div class="signup-image">
     <img src="assets/sign-up-banner.jpg" alt="signup" />
@@ -76,70 +83,82 @@
       <h1 class="signup-title">Sign Up</h1>
       <h2 class="signup-subtitle">Make an account.</h2>
 
-      <div class="label-flex">
-        <p class="input-label">Username</p>
-        <p class="required">*</p>
-      </div>
+      <form (submit)="onClickSignup()">
+        <div class="label-flex">
+          <p class="input-label">Username</p>
+          <p class="required">*</p>
+        </div>
+        <input
+          type="text"
+          class="signup-input"
+          placeholder="Enter your username"
+          name="username"
+          autocomplete="username"
+          required
+          [@inputError]="errorState[0]"
+          (blur)="showError(0)"
+          required
+        />
 
-      <input
-        type="username"
-        class="signup-input"
-        placeholder="Enter your username"
-        name="username"
-        [@inputError]="errorState[0]"
-        (blur)="showError(0)"
-      />
+        <div class="label-flex">
+          <p class="input-label">Email</p>
+          <p class="required">*</p>
+        </div>
+        <input
+          type="email"
+          class="signup-input"
+          placeholder="Enter your email"
+          name="email"
+          autocomplete="email"
+          required
+          [@inputError]="errorState[1]"
+          (blur)="showError(1)"
+          required
+        />
 
-      <div class="label-flex">
-        <p class="input-label">Email</p>
-        <p class="required">*</p>
-      </div>
+        <div class="label-flex">
+          <p class="input-label">Password</p>
+          <p class="required">*</p>
+        </div>
+        <input
+          type="password"
+          class="signup-input"
+          placeholder="Enter your password"
+          name="password"
+          autocomplete="current-password"
+          required
+          [@inputError]="errorState[2]"
+          (blur)="showError(2)"
+          required
+        />
 
-      <input
-        type="email"
-        class="signup-input"
-        placeholder="Enter your email"
-        name="email"
-        [@inputError]="errorState[1]"
-        (blur)="showError(1)"
-      />
+        <div class="label-flex">
+          <p class="input-label">Confirm password</p>
+          <p class="required">*</p>
+        </div>
+        <input
+          type="password"
+          class="signup-input"
+          placeholder="Enter your password"
+          name="confirmPassword"
+          required
+          autocomplete="current-password"
+          [@inputError]="errorState[3]"
+          (blur)="showError(3)"
+          required
+        />
 
-      <div class="label-flex">
-        <p class="input-label">Password</p>
-        <p class="required">*</p>
-      </div>
+        <button
+          type="submit"
+          class="signup-button"
+          [@buttonHover]="buttonState[0]"
+          (mouseenter)="onButtonHover(0)"
+          (mouseleave)="onButtonLeave(0)"
+        >
+          Sign Up
+        </button>
+      </form>
 
-      <input
-        type="password"
-        class="signup-input"
-        placeholder="Enter your password"
-        name="password"
-        [@inputError]="errorState[2]"
-        (blur)="showError(2)"
-      />
-
-      <div class="label-flex">
-        <p class="input-label">Confirm password</p>
-        <p class="required">*</p>
-      </div>
-
-      <input
-        type="password"
-        class="signup-input"
-        placeholder="Enter your password"
-        name="password"
-        [@inputError]="errorState[3]"
-        (blur)="showError(3)"
-      />
-
-      <button
-        class="signup-button"
-        [@buttonHover]="buttonState[0]"
-        (mouseenter)="onButtonHover(0)"
-        (mouseleave)="onButtonLeave(0)"
-      >
-        Sign Up
-      </button>
       <button
         class="go-back"
         [@buttonHover]="buttonState[1]"
@@ -152,6 +171,7 @@
     </div>
   </div>
 </div>
+
 <div class="forgot-password-container" *ngIf="isForgotPassword">
   <div class="forgot-password-image">
     <img src="assets/forgot-password-banner.jpg" alt="forgot-password" />
@@ -163,28 +183,34 @@
         We will send you an email to reset your password.
       </h2>
 
-      <div class="label-flex">
-        <p class="input-label">Email</p>
-        <p class="required">*</p>
-      </div>
+      <form (submit)="onClickSendEmail()">
+        <div class="label-flex">
+          <p class="input-label">Email</p>
+          <p class="required">*</p>
+        </div>
+        <input
+          type="email"
+          class="forgot-password-input"
+          placeholder="Enter your email"
+          name="email"
+          autocomplete="email"
+          required
+          [@inputError]="errorState[0]"
+          (blur)="showError(0)"
+          required
+        />
 
-      <input
-        type="email"
-        class="forgot-password-input"
-        placeholder="Enter your email"
-        name="email"
-        [@inputError]="errorState[0]"
-        (blur)="showError(0)"
-      />
+        <button
+          type="submit"
+          class="forgot-password-button"
+          [@buttonHover]="buttonState[0]"
+          (mouseenter)="onButtonHover(0)"
+          (mouseleave)="onButtonLeave(0)"
+        >
+          Send Email
+        </button>
+      </form>
 
-      <button
-        class="forgot-password-button"
-        [@buttonHover]="buttonState[0]"
-        (mouseenter)="onButtonHover(0)"
-        (mouseleave)="onButtonLeave(0)"
-      >
-        Send Email
-      </button>
       <button
         class="go-back"
         [@buttonHover]="buttonState[1]"
@@ -198,5 +224,6 @@
     </div>
   </div>
 </div>
+
 <p class="copyright">© 2025 HealthConnect. All rights reserved.</p>
 <loading-spinner [visibility]="isLoading"></loading-spinner>
