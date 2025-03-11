@@ -13,7 +13,11 @@
         <h1 class="login-title">Sign In</h1>
         <h2 class="login-subtitle">Unlock your world.</h2>
 
-        <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
+        <form
+          [attr.novalidate]="null"
+          [formGroup]="loginForm"
+          (ngSubmit)="onClickLogin()"
+        >
           <div class="label-flex">
             <p class="input-label">Email</p>
             <p class="required">*</p>
@@ -22,12 +26,10 @@
             type="email"
             class="login-input"
             placeholder="Enter your email"
-            name="email"
+            formControlName="email"
             autocomplete="email"
-            required
             [@inputError]="errorState[0]"
             (blur)="showError(0)"
-            required
           />
 
           <div class="label-flex">
@@ -38,12 +40,10 @@
             type="password"
             class="login-input"
             placeholder="Enter your password"
-            name="password"
+            formControlName="password"
             autocomplete="current-password"
-            required
             [@inputError]="errorState[1]"
             (blur)="showError(1)"
-            required
           />
 
           <button
@@ -89,21 +89,23 @@
         <h1 class="signup-title">Sign Up</h1>
         <h2 class="signup-subtitle">Make an account.</h2>
 
-        <form [formGroup]="signupForm" (ngSubmit)="onClickSignup()">
+        <form
+          [attr.novalidate]="null"
+          [formGroup]="signupForm"
+          (ngSubmit)="onClickSignup()"
+        >
           <div class="label-flex">
-            <p class="input-label">Username</p>
+            <p class="input-label">UserformControlName</p>
             <p class="required">*</p>
           </div>
           <input
             type="text"
             class="signup-input"
             placeholder="Enter your username"
-            name="username"
+            formControlName="username"
             autocomplete="username"
-            required
             [@inputError]="errorState[0]"
             (blur)="showError(0)"
-            required
           />
 
           <div class="label-flex">
@@ -114,12 +116,10 @@
             type="email"
             class="signup-input"
             placeholder="Enter your email"
-            name="email"
+            formControlName="email"
             autocomplete="email"
-            required
             [@inputError]="errorState[1]"
             (blur)="showError(1)"
-            required
           />
 
           <div class="label-flex">
@@ -130,12 +130,10 @@
             type="password"
             class="signup-input"
             placeholder="Enter your password"
-            name="password"
+            formControlName="password"
             autocomplete="current-password"
-            required
             [@inputError]="errorState[2]"
             (blur)="showError(2)"
-            required
           />
 
           <div class="label-flex">
@@ -146,12 +144,10 @@
             type="password"
             class="signup-input"
             placeholder="Enter your password"
-            name="confirmPassword"
-            required
+            formControlName="confirmPassword"
             autocomplete="current-password"
             [@inputError]="errorState[3]"
             (blur)="showError(3)"
-            required
           />
 
           <button
@@ -189,7 +185,11 @@
           We will send you an email to reset your password.
         </h2>
 
-        <form [formGroup]="forgotPasswordForm" (ngSubmit)="onClickSendEmail()">
+        <form
+          [attr.novalidate]="null"
+          [formGroup]="forgotPasswordForm"
+          (ngSubmit)="onClickSendEmail()"
+        >
           <div class="label-flex">
             <p class="input-label">Email</p>
             <p class="required">*</p>
@@ -198,12 +198,10 @@
             type="email"
             class="forgot-password-input"
             placeholder="Enter your email"
-            name="email"
+            formControlName="email"
             autocomplete="email"
-            required
             [@inputError]="errorState[0]"
             (blur)="showError(0)"
-            required
           />
 
           <button

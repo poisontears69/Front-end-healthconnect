@@ -26,7 +26,7 @@ export class LoginPageComponent implements OnInit {
   /**
    * Lifecycle hook that is called after data-bound properties of a directive are initialized.
    * This method is used to perform any necessary setup or initialization for the component.
-   * 
+   *
    * In this implementation, it calls two methods:
    * 1. `playIntro()`: Plays the introductory animation or sequence.
    * 2. `initializeForm()`: Sets up the form controls and validation.
@@ -103,7 +103,15 @@ export class LoginPageComponent implements OnInit {
    * Also toggles the loading spinner for a set duration.
    */
   protected onClickLogin(): void {
-    this.toggleSpinner();
+    if (this.loginForm.valid) {
+      console.log('Form Value:', this.loginForm.value);
+      this.toggleSpinner();
+      // Perform your login logic here, e.g., call an authentication service.
+    } else {
+      console.log('Form is invalid.' + this.loginForm.get('email')?.value + this.loginForm.get('password')?.value);
+      // Optionally, mark all fields as touched to trigger validation messages
+      this.loginForm.markAllAsTouched();
+    }
   }
 
   /**
