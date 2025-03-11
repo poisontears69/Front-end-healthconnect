@@ -1,14 +1,17 @@
-<div [ngClass]="isNavbarScrolled ? 'header-bar scrolled' : 'header-bar'">
+<div [ngClass]="isNavbarScrolled ? 'header-bar scrolled' : 'header-bar'" *ngIf="currentRoute !== '/'">
   <div class="header-content">
     <div class="logo">
       <h1>HealthConnect</h1>
     </div>
   </div>
 </div>
-<div class="content-body">
+<div class="content-body" *ngIf="currentRoute !== '/'">
   <router-outlet></router-outlet>
 </div>
-<div class="footer-bar">
+<div class="login-body" *ngIf="currentRoute === '/'">
+  <router-outlet></router-outlet>
+</div>
+<div class="footer-bar" *ngIf="currentRoute !== '/'">
   <div class="footer-content">
     <p>© 2025 HealthConnect. All rights reserved.</p>
   </div>

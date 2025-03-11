@@ -1,8 +1,8 @@
 <div class="login-container">
   <div class="login-image">
     <img
-      src="https://images.squarespace-cdn.com/content/v1/5936cc36be6594d92e83a82c/1567166514417-CYGZYIRTLLTD8E1DL8U6/20190830_074824.jpg?format=550w"
-      alt="Login Image"
+      src="https://images.squarespace-cdn.com/content/v1/5936cc36be6594d92e83a82c/1567166514417-CYGZYIRTLLTD8E1DL8U6/20190830_074824.jpg?format=400w"
+      alt="Login"
     />
   </div>
   <div class="main-content">
@@ -10,24 +10,50 @@
       <h1 class="login-title">Sign In</h1>
       <h2 class="login-subtitle">Unlock your world.</h2>
 
-      <p class="input-label">Email</p>
+      <div class="label-flex">
+        <p class="input-label">Email</p>
+        <p class="required">*</p>
+      </div>
+
       <input
         type="email"
         class="login-input"
         placeholder="Enter your email"
         name="email"
+        [@inputError]="errorState[0]"
+        (blur)="showError(0)"
       />
 
-      <p class="input-label">Password</p>
+      <div class="label-flex">
+        <p class="input-label">Password</p>
+        <p class="required">*</p>
+      </div>
+
       <input
         type="password"
         class="login-input"
         placeholder="Enter your password"
         name="password"
+        [@inputError]="errorState[1]"
+        (blur)="showError(1)"
       />
 
-      <button class="login-button">Sign In</button>
-      <button class="create-account">Create an account</button>
+      <button
+        class="login-button"
+        [@buttonHover]="buttonState[0]"
+        (mouseenter)="onButtonHover(0)"
+        (mouseleave)="onButtonLeave(0)"
+      >
+        Sign In
+      </button>
+      <button
+        class="create-account"
+        [@buttonHover]="buttonState[1]"
+        (mouseenter)="onButtonHover(1)"
+        (mouseleave)="onButtonLeave(1)"
+      >
+        Create an account
+      </button>
 
       <div class="login-link">
         <a href="">Forgot your password?</a>
@@ -35,3 +61,5 @@
     </div>
   </div>
 </div>
+
+<p class="copyright">© 2025 HealthConnect. All rights reserved.</p>

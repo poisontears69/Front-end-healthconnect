@@ -1,10 +1,19 @@
 import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  keyframes,
+} from '@angular/animations';
+import {
   Component,
   ElementRef,
   HostListener,
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -36,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   );
 
-  constructor(private _elementRef: ElementRef) {}
+  constructor(private _elementRef: ElementRef, private routerService: Router) {}
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -58,6 +67,10 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+  }
+
+  protected get currentRoute(): string {
+    return this.routerService.url;
   }
 
   scrollToSection(options: {

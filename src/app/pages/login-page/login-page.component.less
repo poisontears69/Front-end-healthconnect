@@ -4,7 +4,7 @@
   align-items: center;
   background-color: white;
   border-radius: 15px;
-  height: 76vh;
+  height: 500px;
   gap: 30px;
   overflow: hidden;
 
@@ -25,7 +25,7 @@
       padding: 20px;
       background-color: white;
       border-radius: 5px;
-      box-sizing: border-box; 
+      box-sizing: border-box;
 
       .login-title {
         font-family: "Jost", sans-serif;
@@ -38,12 +38,24 @@
         font-family: "Jost", sans-serif;
         font-size: 16px;
         font-weight: 300;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
       }
 
-      .input-label {
-        font-family: "Jost", sans-serif;
-        font-size: 12px;
+      .label-flex {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: -10px;
+        gap: 5px;
+
+        .input-label {
+          font-family: "Jost", sans-serif;
+          font-size: 12px;
+        }
+
+        .required {
+          color: red;
+        }
       }
 
       .login-input {
@@ -53,7 +65,7 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         box-sizing: border-box;
-        width: calc(100% - 2px); 
+        width: calc(100% - 2px);
       }
 
       .login-button {
@@ -92,4 +104,11 @@
       }
     }
   }
+}
+
+.copyright {
+  font-family: "Jost", sans-serif;
+  font-size: 12px;
+  color: white;
+  margin-bottom: -5px;
 }
