@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { SharedModule } from './reusables/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginPageComponent],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,

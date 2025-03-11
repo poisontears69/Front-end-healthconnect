@@ -1,3 +1,4 @@
+// login style
 .login-container {
   display: flex;
   justify-content: center;
@@ -98,6 +99,122 @@
       }
 
       .login-link {
+        font-family: "Jost", sans-serif;
+        font-size: 12px;
+        text-align: center;
+        margin-top: 10px;
+        text-align: center;
+
+        a {
+          color: #205781;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+// signup style
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 15px;
+  height: 600px;
+  gap: 30px;
+  overflow: hidden;
+
+  .signup-image {
+    width: 50%;
+    overflow: hidden;
+
+    img {
+      width: 400px;
+      object-fit: scale-down;
+    }
+  }
+
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    overflow: hidden;
+
+    .signup-content {
+      width: 80%;
+      padding: 20px;
+      background-color: white;
+      border-radius: 5px;
+      box-sizing: border-box;
+
+      .signup-title {
+        font-family: "Jost", sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: -5px;
+      }
+
+      .signup-subtitle {
+        font-family: "Jost", sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        margin-bottom: 10px;
+      }
+
+      .label-flex {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: -10px;
+        gap: 5px;
+
+        .input-label {
+          font-family: "Jost", sans-serif;
+          font-size: 12px;
+        }
+
+        .required {
+          color: red;
+        }
+      }
+
+      .signup-input {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-sizing: border-box;
+        width: calc(100% - 2px);
+      }
+
+      .signup-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #205781;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 20px 0;
+        border-radius: 10px;
+      }
+
+      .create-account {
+        width: 100%;
+        padding: 10px;
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+        border-radius: 10px;
+      }
+
+      .signup-link {
         font-family: "Jost", sans-serif;
         font-size: 12px;
         text-align: center;

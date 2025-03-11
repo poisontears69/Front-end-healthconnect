@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="login-container" *ngIf="!isCreateAccount">
   <div class="login-image">
     <img
       src="https://filipinotimes.net/wp-content/uploads/2017/11/Dr.-Cristina-Fernandez.jpg"
@@ -51,6 +51,7 @@
         [@buttonHover]="buttonState[1]"
         (mouseenter)="onButtonHover(1)"
         (mouseleave)="onButtonLeave(1)"
+        (click)="onClickGoToCreateOrLogin()"
       >
         Create an account
       </button>
@@ -61,5 +62,92 @@
     </div>
   </div>
 </div>
+<div class="signup-container" *ngIf="isCreateAccount">
+  <div class="signup-image">
+    <img
+      src="https://th.bing.com/th/id/OIP.komvKgq94ra-ZVOHJNlLawHaLH?rs=1&pid=ImgDetMain"
+      alt="signup"
+    />
+  </div>
+  <div class="main-content">
+    <div class="signup-content">
+      <h1 class="signup-title">Sign Up</h1>
+      <h2 class="signup-subtitle">Make an account.</h2>
 
+      <div class="label-flex">
+        <p class="input-label">Username</p>
+        <p class="required">*</p>
+      </div>
+
+      <input
+        type="username"
+        class="signup-input"
+        placeholder="Enter your username"
+        name="username"
+        [@inputError]="errorState[0]"
+        (blur)="showError(0)"
+      />
+
+      <div class="label-flex">
+        <p class="input-label">Email</p>
+        <p class="required">*</p>
+      </div>
+
+      <input
+        type="email"
+        class="signup-input"
+        placeholder="Enter your email"
+        name="email"
+        [@inputError]="errorState[0]"
+        (blur)="showError(0)"
+      />
+
+      <div class="label-flex">
+        <p class="input-label">Password</p>
+        <p class="required">*</p>
+      </div>
+
+      <input
+        type="password"
+        class="signup-input"
+        placeholder="Enter your password"
+        name="password"
+        [@inputError]="errorState[1]"
+        (blur)="showError(1)"
+      />
+
+      <div class="label-flex">
+        <p class="input-label">Confirm password</p>
+        <p class="required">*</p>
+      </div>
+
+      <input
+        type="password"
+        class="signup-input"
+        placeholder="Enter your password"
+        name="password"
+        [@inputError]="errorState[1]"
+        (blur)="showError(1)"
+      />
+
+      <button
+        class="signup-button"
+        [@buttonHover]="buttonState[0]"
+        (mouseenter)="onButtonHover(0)"
+        (mouseleave)="onButtonLeave(0)"
+      >
+        Sign In
+      </button>
+      <button
+        class="create-account"
+        [@buttonHover]="buttonState[1]"
+        (mouseenter)="onButtonHover(1)"
+        (mouseleave)="onButtonLeave(1)"
+        (click)="onClickGoToCreateOrLogin()"
+      >
+        Go Back To Log In
+      </button>
+    </div>
+  </div>
+</div>
 <p class="copyright">© 2025 HealthConnect. All rights reserved.</p>
