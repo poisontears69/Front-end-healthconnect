@@ -1,4 +1,4 @@
-<div class="login-container" *ngIf="!isCreateAccount">
+<div class="login-container" *ngIf="!isCreateAccount && !isForgotPassword">
   <div class="login-image">
     <img
       src="https://filipinotimes.net/wp-content/uploads/2017/11/Dr.-Cristina-Fernandez.jpg"
@@ -52,17 +52,23 @@
         (mouseenter)="onButtonHover(1)"
         (mouseleave)="onButtonLeave(1)"
         (click)="onClickGoToCreateOrLogin()"
+        (keypress)="onClickGoToCreateOrLogin()"
       >
         Create an account
       </button>
 
       <div class="login-link">
-        <a href="">Forgot your password?</a>
+        <a
+          (click)="onClickGoToForgetPasswordOrLogin()"
+          (keypress)="onClickGoToForgetPasswordOrLogin()"
+        >
+          Forgot your password?
+        </a>
       </div>
     </div>
   </div>
 </div>
-<div class="signup-container" *ngIf="isCreateAccount">
+<div class="signup-container" *ngIf="isCreateAccount && !isForgotPassword">
   <div class="signup-image">
     <img
       src="https://th.bing.com/th/id/OIP.komvKgq94ra-ZVOHJNlLawHaLH?rs=1&pid=ImgDetMain"
@@ -139,11 +145,60 @@
         Sign Up
       </button>
       <button
-        class="create-account"
+        class="go-back"
         [@buttonHover]="buttonState[1]"
         (mouseenter)="onButtonHover(1)"
         (mouseleave)="onButtonLeave(1)"
         (click)="onClickGoToCreateOrLogin()"
+      >
+        Go Back To Log In
+      </button>
+    </div>
+  </div>
+</div>
+<div class="forgot-password-container" *ngIf="isForgotPassword">
+  <div class="forgot-password-image">
+    <img
+      src="https://static.vecteezy.com/system/resources/previews/003/805/407/large_2x/message-notification-concept-email-illustration-flat-vector.jpg"
+      alt="forgotpassword"
+    />
+  </div>
+  <div class="main-content">
+    <div class="forgot-password-content">
+      <h1 class="forgot-password-title">Forgot Password?</h1>
+      <h2 class="forgot-password-subtitle">
+        We will send you an email to reset your password.
+      </h2>
+
+      <div class="label-flex">
+        <p class="input-label">Email</p>
+        <p class="required">*</p>
+      </div>
+
+      <input
+        type="email"
+        class="forgot-password-input"
+        placeholder="Enter your email"
+        name="email"
+        [@inputError]="errorState[0]"
+        (blur)="showError(0)"
+      />
+
+      <button
+        class="forgot-password-button"
+        [@buttonHover]="buttonState[0]"
+        (mouseenter)="onButtonHover(0)"
+        (mouseleave)="onButtonLeave(0)"
+      >
+        Send Email
+      </button>
+      <button
+        class="go-back"
+        [@buttonHover]="buttonState[1]"
+        (mouseenter)="onButtonHover(1)"
+        (mouseleave)="onButtonLeave(1)"
+        (click)="onClickGoToForgetPasswordOrLogin()"
+        (keypress)="onClickGoToForgetPasswordOrLogin()"
       >
         Go Back To Log In
       </button>

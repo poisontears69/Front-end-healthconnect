@@ -11,6 +11,7 @@ export class LoginPageComponent {
   protected buttonState: string[] = new Array(2).fill('normal');
   protected errorState: string[] = new Array(2).fill('');
   protected isCreateAccount: boolean = false;
+  protected isForgotPassword: boolean = false;
 
   /**
    * Handles the hover event for a button.
@@ -50,5 +51,9 @@ export class LoginPageComponent {
     }
 
     this.isCreateAccount = !this.isCreateAccount;
+  }
+
+  protected onClickGoToForgetPasswordOrLogin() {
+    this.isForgotPassword = !this.isForgotPassword;
   }
 }
