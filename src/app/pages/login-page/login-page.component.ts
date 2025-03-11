@@ -12,6 +12,7 @@ export class LoginPageComponent {
   protected errorState: string[] = new Array(2).fill('');
   protected isCreateAccount: boolean = false;
   protected isForgotPassword: boolean = false;
+  protected isLoading: boolean = false;
 
   /**
    * Handles the hover event for a button.
@@ -41,6 +42,10 @@ export class LoginPageComponent {
     setTimeout(() => (this.errorState[index] = ''), 1000);
   }
 
+  protected onClickLogin() {
+    this.toggleSpinner();
+  }
+
   protected onClickGoToCreateOrLogin() {
     if (this.isCreateAccount) {
       this.buttonState = new Array(2).fill('normal');
@@ -55,5 +60,13 @@ export class LoginPageComponent {
 
   protected onClickGoToForgetPasswordOrLogin() {
     this.isForgotPassword = !this.isForgotPassword;
+  }
+
+  /**
+   * Toggles the visibility of the spinner for 2 seconds.
+   */
+  protected toggleSpinner() {
+    this.isLoading = true;
+    setTimeout(() => (this.isLoading = false), 2000);
   }
 }

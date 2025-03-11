@@ -6,7 +6,7 @@
   right: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #37517e;
+  background-color: rgb(20, 20, 20);
 }
 
 .spinner-centered {
@@ -17,7 +17,17 @@
   z-index: 10;
 }
 
-.spinner-style {
+.spinner-centered img {
   width: 3rem;
   height: 3rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -13,7 +13,6 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    CommonModule,
     SharedModule,
     BrowserAnimationsModule,
   ],

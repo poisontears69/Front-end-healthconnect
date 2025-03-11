@@ -38,6 +38,8 @@
       <button
         class="login-button"
         [@buttonHover]="buttonState[0]"
+        (click)="onClickLogin()"
+        (keypress)="onClickLogin()"
         (mouseenter)="onButtonHover(0)"
         (mouseleave)="onButtonLeave(0)"
       >
@@ -152,7 +154,6 @@
 </div>
 <div class="forgot-password-container" *ngIf="isForgotPassword">
   <div class="forgot-password-image">
-   
     <img src="assets/forgot-password-banner.jpg" alt="forgot-password" />
   </div>
   <div class="main-content">
@@ -198,3 +199,4 @@
   </div>
 </div>
 <p class="copyright">© 2025 HealthConnect. All rights reserved.</p>
+<loading-spinner [visibility]="isLoading"></loading-spinner>
