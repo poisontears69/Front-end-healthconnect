@@ -1,89 +1,34 @@
 import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  keyframes,
-} from '@angular/animations';
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnDestroy,
-  OnInit,
+  Component, HostListener
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.less',
 })
-export class AppComponent implements OnInit, OnDestroy {
-  sub!: Subscription;
-  showSpinner!: boolean;
-  showNavMenu = false;
-  isNavbarScrolled: boolean = false;
-  currentSection: string = 'home';
-  sections!: Element[];
-  isMobileView: boolean = false;
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // If the section is in view, set it as the current section
-          this.currentSection = entry.target.id;
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.5,
-    }
-  );
+export class AppComponent {
+  protected isNavbarScrolled: boolean = false;
 
-  constructor(private _elementRef: ElementRef, private routerService: Router) {}
+  constructor(private routerService: Router) {}
 
+  /**
+   * Handles the window scroll event to update the `isNavbarScrolled` property.
+   * Sets `isNavbarScrolled` to `true` if the window has been scrolled down, otherwise sets it to `false`.
+   */
   @HostListener('window:scroll', ['$event'])
-  onWindowScroll() {
+  protected onWindowScroll() {
     this.isNavbarScrolled = window.scrollY > 0;
-    if (!this.sections) {
-      // Get all sections
-      this.sections =
-        this._elementRef.nativeElement.querySelectorAll('.section');
-    }
-    // Observe each section
-    this.sections.forEach((section: Element) => {
-      this.observer.observe(section);
-    });
   }
 
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
-  }
-
+  /**
+   * Gets the current route URL from the router service.
+   *
+   * @protected
+   * @returns {string} The current route URL.
+   */
   protected get currentRoute(): string {
     return this.routerService.url;
-  }
-
-  scrollToSection(options: {
-    sectionId: string;
-    scrollBlockType?: ScrollLogicalPosition;
-  }): void {
-    const { sectionId, scrollBlockType } = options;
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: scrollBlockType ?? 'center',
-      });
-    }
   }
 }
