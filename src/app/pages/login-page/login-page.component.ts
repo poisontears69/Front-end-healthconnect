@@ -41,6 +41,14 @@ export class LoginPageComponent {
   }
 
   protected onClickGoToCreateOrLogin() {
+    if (this.isCreateAccount) {
+      this.buttonState = new Array(2).fill('normal');
+      this.errorState = new Array(4).fill('');
+    } else {
+      this.buttonState = new Array(2).fill('normal');
+      this.errorState = new Array(2).fill('');
+    }
+
     this.isCreateAccount = !this.isCreateAccount;
   }
 }

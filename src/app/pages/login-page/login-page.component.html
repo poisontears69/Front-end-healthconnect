@@ -98,8 +98,8 @@
         class="signup-input"
         placeholder="Enter your email"
         name="email"
-        [@inputError]="errorState[0]"
-        (blur)="showError(0)"
+        [@inputError]="errorState[1]"
+        (blur)="showError(1)"
       />
 
       <div class="label-flex">
@@ -112,8 +112,8 @@
         class="signup-input"
         placeholder="Enter your password"
         name="password"
-        [@inputError]="errorState[1]"
-        (blur)="showError(1)"
+        [@inputError]="errorState[2]"
+        (blur)="showError(2)"
       />
 
       <div class="label-flex">
@@ -126,8 +126,8 @@
         class="signup-input"
         placeholder="Enter your password"
         name="password"
-        [@inputError]="errorState[1]"
-        (blur)="showError(1)"
+        [@inputError]="errorState[3]"
+        (blur)="showError(3)"
       />
 
       <button
@@ -136,7 +136,7 @@
         (mouseenter)="onButtonHover(0)"
         (mouseleave)="onButtonLeave(0)"
       >
-        Sign In
+        Sign Up
       </button>
       <button
         class="create-account"
