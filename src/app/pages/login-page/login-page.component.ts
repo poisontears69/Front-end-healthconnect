@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { animations } from '../../reusables/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -13,6 +14,8 @@ export class LoginPageComponent {
   protected isCreateAccount: boolean = false;
   protected isForgotPassword: boolean = false;
   protected isLoading: boolean = false;
+
+  constructor(private readonly routerService: Router) {}
 
   /**
    * Handles the hover event for a button.
@@ -42,19 +45,36 @@ export class LoginPageComponent {
     setTimeout(() => (this.errorState[index] = ''), 1000);
   }
 
-  protected onClickLogin() {
+  /**
+   * Navigates to the home page when the login button is clicked.
+   * Also toggles the loading spinner for a set duration.
+   */
+  protected onClickLogin(): void {
+    this.routerService.navigate(['/home']);
     this.toggleSpinner();
   }
 
-  protected onClickSignup() {
+  /**
+   * Handles the sign-up button click event.
+   * Currently toggles the loading spinner.
+   */
+  protected onClickSignup(): void {
     this.toggleSpinner();
   }
 
-  protected onClickSendEmail() {
+  /**
+   * Handles the "Send Email" button click event for password reset.
+   * Toggles the loading spinner to simulate the email sending process.
+   */
+  protected onClickSendEmail(): void {
     this.toggleSpinner();
   }
 
-  protected onClickGoToCreateOrLogin() {
+  /**
+   * Toggles between the Create Account and Login views.
+   * Resets the button and error states based on the active view.
+   */
+  protected onClickGoToCreateOrLogin(): void {
     if (this.isCreateAccount) {
       this.buttonState = new Array(2).fill('normal');
       this.errorState = new Array(4).fill('');
@@ -66,14 +86,18 @@ export class LoginPageComponent {
     this.isCreateAccount = !this.isCreateAccount;
   }
 
-  protected onClickGoToForgetPasswordOrLogin() {
+  /**
+   * Toggles between the Forgot Password and Login views.
+   */
+  protected onClickGoToForgetPasswordOrLogin(): void {
     this.isForgotPassword = !this.isForgotPassword;
   }
 
   /**
-   * Toggles the visibility of the spinner for 2 seconds.
+   * Toggles the visibility of the loading spinner.
+   * The spinner is visible for 3 seconds before being hidden.
    */
-  protected toggleSpinner() {
+  protected toggleSpinner(): void {
     this.isLoading = true;
     setTimeout(() => (this.isLoading = false), 3000);
   }
