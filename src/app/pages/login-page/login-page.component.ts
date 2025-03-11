@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { animations } from '../../../assets/animations';
+import { animations } from '../../reusables/animations';
 
 @Component({
   selector: 'app-login-page',
