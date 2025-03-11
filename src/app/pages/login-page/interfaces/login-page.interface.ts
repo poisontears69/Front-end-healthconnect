@@ -14,7 +14,7 @@ export interface SignUpFormGroupInterface {
 }
 
 export interface SignUpFormPhase2GroupInterface {
-  isDoctor: FormControl<boolean | null>;
+  isDoctor: FormControl<string | null>;
 }
 
 export interface ForgotPasswordFormGroupInterface {

@@ -80,7 +80,7 @@ export class LoginPageComponent implements OnInit {
     });
 
     this.signupPhase2Form = new FormGroup({
-      isDoctor: new FormControl(false, Validators.required),
+      isDoctor: new FormControl('', Validators.required),
     });
 
     this.forgotPasswordForm = new FormGroup({
