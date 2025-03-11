@@ -9,11 +9,10 @@
   <router-outlet></router-outlet>
 </div>
 <div class="login-body" *ngIf="currentRoute === '/'">
-  <router-outlet *ngIf="!isPlayingIntro"></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 <div class="footer-bar" *ngIf="currentRoute !== '/'">
   <div class="footer-content">
     <p>© 2025 HealthConnect. All rights reserved.</p>
   </div>
 </div>
-<loading-spinner [visibility]="isPlayingIntro" [intro]="isPlayingIntro"></loading-spinner>

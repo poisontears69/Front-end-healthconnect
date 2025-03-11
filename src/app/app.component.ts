@@ -8,15 +8,10 @@ import { animations } from './reusables/animations';
   styleUrl: './app.component.less',
     animations: [animations]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   protected isNavbarScrolled: boolean = false;
-  protected isPlayingIntro: boolean = true;
 
   constructor(private routerService: Router) {}
-
-  public ngOnInit(): void {
-    this.playIntro();
-  }
 
   /**
    * Handles the window scroll event to update the `isNavbarScrolled` property.
@@ -35,10 +30,5 @@ export class AppComponent implements OnInit {
    */
   protected get currentRoute(): string {
     return this.routerService.url;
-  }
-
-  protected playIntro() {
-    this.isPlayingIntro = true;
-    setTimeout(() => (this.isPlayingIntro = false), 2000);
   }
 }

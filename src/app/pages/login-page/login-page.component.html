@@ -1,229 +1,235 @@
-<div class="login-container" *ngIf="!isCreateAccount && !isForgotPassword">
-  <div class="login-image">
-    <img src="assets/sign-in-banner.jpg" alt="Login" />
-  </div>
-  <div class="main-content">
-    <div class="login-content">
-      <h1 class="login-title">Sign In</h1>
-      <h2 class="login-subtitle">Unlock your world.</h2>
+<loading-spinner
+  [visibility]="isLoading"
+  [intro]="isPlayingIntro"
+></loading-spinner>
 
-      <form (submit)="onClickLogin()">
-        <div class="label-flex">
-          <p class="input-label">Email</p>
-          <p class="required">*</p>
-        </div>
-        <input
-          type="email"
-          class="login-input"
-          placeholder="Enter your email"
-          name="email"
-          autocomplete="email"
-          required
-          [@inputError]="errorState[0]"
-          (blur)="showError(0)"
-          required
-        />
+<ng-container *ngIf="!isPlayingIntro">
+  <div class="login-container" *ngIf="!isCreateAccount && !isForgotPassword">
+    <div class="login-image">
+      <img src="assets/sign-in-banner.jpg" alt="Login" />
+    </div>
+    <div class="main-content">
+      <div class="login-content">
+        <h1 class="login-title">Sign In</h1>
+        <h2 class="login-subtitle">Unlock your world.</h2>
 
-        <div class="label-flex">
-          <p class="input-label">Password</p>
-          <p class="required">*</p>
-        </div>
-        <input
-          type="password"
-          class="login-input"
-          placeholder="Enter your password"
-          name="password"
-          autocomplete="current-password"
-          required
-          [@inputError]="errorState[1]"
-          (blur)="showError(1)"
-          required
-        />
+        <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
+          <div class="label-flex">
+            <p class="input-label">Email</p>
+            <p class="required">*</p>
+          </div>
+          <input
+            type="email"
+            class="login-input"
+            placeholder="Enter your email"
+            name="email"
+            autocomplete="email"
+            required
+            [@inputError]="errorState[0]"
+            (blur)="showError(0)"
+            required
+          />
+
+          <div class="label-flex">
+            <p class="input-label">Password</p>
+            <p class="required">*</p>
+          </div>
+          <input
+            type="password"
+            class="login-input"
+            placeholder="Enter your password"
+            name="password"
+            autocomplete="current-password"
+            required
+            [@inputError]="errorState[1]"
+            (blur)="showError(1)"
+            required
+          />
+
+          <button
+            type="submit"
+            class="login-button"
+            [@buttonHover]="buttonState[0]"
+            (mouseenter)="onButtonHover(0)"
+            (mouseleave)="onButtonLeave(0)"
+          >
+            Sign In
+          </button>
+        </form>
 
         <button
-          type="submit"
-          class="login-button"
-          [@buttonHover]="buttonState[0]"
-          (mouseenter)="onButtonHover(0)"
-          (mouseleave)="onButtonLeave(0)"
+          class="create-account"
+          [@buttonHover]="buttonState[1]"
+          (mouseenter)="onButtonHover(1)"
+          (mouseleave)="onButtonLeave(1)"
+          (click)="onClickGoToCreateOrLogin()"
+          (keypress)="onClickGoToCreateOrLogin()"
         >
-          Sign In
+          Create an account
         </button>
-      </form>
 
-      <button
-        class="create-account"
-        [@buttonHover]="buttonState[1]"
-        (mouseenter)="onButtonHover(1)"
-        (mouseleave)="onButtonLeave(1)"
-        (click)="onClickGoToCreateOrLogin()"
-        (keypress)="onClickGoToCreateOrLogin()"
-      >
-        Create an account
-      </button>
-
-      <div class="login-link">
-        <a
-          (click)="onClickGoToForgetPasswordOrLogin()"
-          (keypress)="onClickGoToForgetPasswordOrLogin()"
-        >
-          Forgot your password?
-        </a>
+        <div class="login-link">
+          <a
+            (click)="onClickGoToForgetPasswordOrLogin()"
+            (keypress)="onClickGoToForgetPasswordOrLogin()"
+          >
+            Forgot your password?
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="signup-container" *ngIf="isCreateAccount && !isForgotPassword">
-  <div class="signup-image">
-    <img src="assets/sign-up-banner.jpg" alt="signup" />
-  </div>
-  <div class="main-content">
-    <div class="signup-content">
-      <h1 class="signup-title">Sign Up</h1>
-      <h2 class="signup-subtitle">Make an account.</h2>
+  <div class="signup-container" *ngIf="isCreateAccount && !isForgotPassword">
+    <div class="signup-image">
+      <img src="assets/sign-up-banner.jpg" alt="signup" />
+    </div>
+    <div class="main-content">
+      <div class="signup-content">
+        <h1 class="signup-title">Sign Up</h1>
+        <h2 class="signup-subtitle">Make an account.</h2>
 
-      <form (submit)="onClickSignup()">
-        <div class="label-flex">
-          <p class="input-label">Username</p>
-          <p class="required">*</p>
-        </div>
-        <input
-          type="text"
-          class="signup-input"
-          placeholder="Enter your username"
-          name="username"
-          autocomplete="username"
-          required
-          [@inputError]="errorState[0]"
-          (blur)="showError(0)"
-          required
-        />
+        <form [formGroup]="signupForm" (ngSubmit)="onClickSignup()">
+          <div class="label-flex">
+            <p class="input-label">Username</p>
+            <p class="required">*</p>
+          </div>
+          <input
+            type="text"
+            class="signup-input"
+            placeholder="Enter your username"
+            name="username"
+            autocomplete="username"
+            required
+            [@inputError]="errorState[0]"
+            (blur)="showError(0)"
+            required
+          />
 
-        <div class="label-flex">
-          <p class="input-label">Email</p>
-          <p class="required">*</p>
-        </div>
-        <input
-          type="email"
-          class="signup-input"
-          placeholder="Enter your email"
-          name="email"
-          autocomplete="email"
-          required
-          [@inputError]="errorState[1]"
-          (blur)="showError(1)"
-          required
-        />
+          <div class="label-flex">
+            <p class="input-label">Email</p>
+            <p class="required">*</p>
+          </div>
+          <input
+            type="email"
+            class="signup-input"
+            placeholder="Enter your email"
+            name="email"
+            autocomplete="email"
+            required
+            [@inputError]="errorState[1]"
+            (blur)="showError(1)"
+            required
+          />
 
-        <div class="label-flex">
-          <p class="input-label">Password</p>
-          <p class="required">*</p>
-        </div>
-        <input
-          type="password"
-          class="signup-input"
-          placeholder="Enter your password"
-          name="password"
-          autocomplete="current-password"
-          required
-          [@inputError]="errorState[2]"
-          (blur)="showError(2)"
-          required
-        />
+          <div class="label-flex">
+            <p class="input-label">Password</p>
+            <p class="required">*</p>
+          </div>
+          <input
+            type="password"
+            class="signup-input"
+            placeholder="Enter your password"
+            name="password"
+            autocomplete="current-password"
+            required
+            [@inputError]="errorState[2]"
+            (blur)="showError(2)"
+            required
+          />
 
-        <div class="label-flex">
-          <p class="input-label">Confirm password</p>
-          <p class="required">*</p>
-        </div>
-        <input
-          type="password"
-          class="signup-input"
-          placeholder="Enter your password"
-          name="confirmPassword"
-          required
-          autocomplete="current-password"
-          [@inputError]="errorState[3]"
-          (blur)="showError(3)"
-          required
-        />
+          <div class="label-flex">
+            <p class="input-label">Confirm password</p>
+            <p class="required">*</p>
+          </div>
+          <input
+            type="password"
+            class="signup-input"
+            placeholder="Enter your password"
+            name="confirmPassword"
+            required
+            autocomplete="current-password"
+            [@inputError]="errorState[3]"
+            (blur)="showError(3)"
+            required
+          />
+
+          <button
+            type="submit"
+            class="signup-button"
+            [@buttonHover]="buttonState[0]"
+            (mouseenter)="onButtonHover(0)"
+            (mouseleave)="onButtonLeave(0)"
+          >
+            Sign Up
+          </button>
+        </form>
 
         <button
-          type="submit"
-          class="signup-button"
-          [@buttonHover]="buttonState[0]"
-          (mouseenter)="onButtonHover(0)"
-          (mouseleave)="onButtonLeave(0)"
+          class="go-back"
+          [@buttonHover]="buttonState[1]"
+          (mouseenter)="onButtonHover(1)"
+          (mouseleave)="onButtonLeave(1)"
+          (click)="onClickGoToCreateOrLogin()"
         >
-          Sign Up
+          Go Back To Log In
         </button>
-      </form>
-
-      <button
-        class="go-back"
-        [@buttonHover]="buttonState[1]"
-        (mouseenter)="onButtonHover(1)"
-        (mouseleave)="onButtonLeave(1)"
-        (click)="onClickGoToCreateOrLogin()"
-      >
-        Go Back To Log In
-      </button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="forgot-password-container" *ngIf="isForgotPassword">
-  <div class="forgot-password-image">
-    <img src="assets/forgot-password-banner.jpg" alt="forgot-password" />
-  </div>
-  <div class="main-content">
-    <div class="forgot-password-content">
-      <h1 class="forgot-password-title">Forgot Password?</h1>
-      <h2 class="forgot-password-subtitle">
-        We will send you an email to reset your password.
-      </h2>
+  <div class="forgot-password-container" *ngIf="isForgotPassword">
+    <div class="forgot-password-image">
+      <img src="assets/forgot-password-banner.jpg" alt="forgot-password" />
+    </div>
+    <div class="main-content">
+      <div class="forgot-password-content">
+        <h1 class="forgot-password-title">Forgot Password?</h1>
+        <h2 class="forgot-password-subtitle">
+          We will send you an email to reset your password.
+        </h2>
 
-      <form (submit)="onClickSendEmail()">
-        <div class="label-flex">
-          <p class="input-label">Email</p>
-          <p class="required">*</p>
-        </div>
-        <input
-          type="email"
-          class="forgot-password-input"
-          placeholder="Enter your email"
-          name="email"
-          autocomplete="email"
-          required
-          [@inputError]="errorState[0]"
-          (blur)="showError(0)"
-          required
-        />
+        <form [formGroup]="forgotPasswordForm" (ngSubmit)="onClickSendEmail()">
+          <div class="label-flex">
+            <p class="input-label">Email</p>
+            <p class="required">*</p>
+          </div>
+          <input
+            type="email"
+            class="forgot-password-input"
+            placeholder="Enter your email"
+            name="email"
+            autocomplete="email"
+            required
+            [@inputError]="errorState[0]"
+            (blur)="showError(0)"
+            required
+          />
+
+          <button
+            type="submit"
+            class="forgot-password-button"
+            [@buttonHover]="buttonState[0]"
+            (mouseenter)="onButtonHover(0)"
+            (mouseleave)="onButtonLeave(0)"
+          >
+            Send Email
+          </button>
+        </form>
 
         <button
-          type="submit"
-          class="forgot-password-button"
-          [@buttonHover]="buttonState[0]"
-          (mouseenter)="onButtonHover(0)"
-          (mouseleave)="onButtonLeave(0)"
+          class="go-back"
+          [@buttonHover]="buttonState[1]"
+          (mouseenter)="onButtonHover(1)"
+          (mouseleave)="onButtonLeave(1)"
+          (click)="onClickGoToForgetPasswordOrLogin()"
+          (keypress)="onClickGoToForgetPasswordOrLogin()"
         >
-          Send Email
+          Go Back To Log In
         </button>
-      </form>
-
-      <button
-        class="go-back"
-        [@buttonHover]="buttonState[1]"
-        (mouseenter)="onButtonHover(1)"
-        (mouseleave)="onButtonLeave(1)"
-        (click)="onClickGoToForgetPasswordOrLogin()"
-        (keypress)="onClickGoToForgetPasswordOrLogin()"
-      >
-        Go Back To Log In
-      </button>
+      </div>
     </div>
   </div>
-</div>
 
-<p class="copyright">© 2025 HealthConnect. All rights reserved.</p>
-<loading-spinner [visibility]="isLoading"></loading-spinner>
+  <p class="copyright">© 2025 HealthConnect. All rights reserved.</p>
+</ng-container>

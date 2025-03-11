@@ -7,6 +7,7 @@ import { routes } from './app.routes';
 import { SharedModule } from './reusables/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent],
@@ -15,6 +16,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     BrowserModule,
     SharedModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],
 })

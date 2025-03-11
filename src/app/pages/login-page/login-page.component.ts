@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { animations } from '../../reusables/animations';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginFormGroupInterface } from './interfaces/login-page.interface';
 
 @Component({
   selector: 'app-login-page',
@@ -8,14 +10,41 @@ import { Router } from '@angular/router';
   styleUrl: './login-page.component.less',
   animations: [animations],
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit {
+  protected loginForm!: FormGroup<LoginFormGroupInterface>;
+  protected signupForm!: FormGroup;
+  protected forgotPasswordForm!: FormGroup;
   protected buttonState: string[] = new Array(2).fill('normal');
   protected errorState: string[] = new Array(2).fill('');
   protected isCreateAccount: boolean = false;
   protected isForgotPassword: boolean = false;
   protected isLoading: boolean = false;
+  protected isPlayingIntro: boolean = true;
 
   constructor(private readonly routerService: Router) {}
+
+  public ngOnInit(): void {
+    this.playIntro();
+    this.initializeForm();
+  }
+
+  private initializeForm(): void {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+    });
+
+    this.signupForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+      confirmPassword: new FormControl('', Validators.required),
+    });
+
+    this.forgotPasswordForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+    });
+  }
 
   /**
    * Handles the hover event for a button.
@@ -50,7 +79,6 @@ export class LoginPageComponent {
    * Also toggles the loading spinner for a set duration.
    */
   protected onClickLogin(): void {
-    this.routerService.navigate(['/home']);
     this.toggleSpinner();
   }
 
@@ -100,5 +128,14 @@ export class LoginPageComponent {
   protected toggleSpinner(): void {
     this.isLoading = true;
     setTimeout(() => (this.isLoading = false), 3000);
+  }
+
+  protected playIntro() {
+    this.isPlayingIntro = true;
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isPlayingIntro = false;
+      this.isLoading = false;
+    }, 2000);
   }
 }
