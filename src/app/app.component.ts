@@ -1,17 +1,22 @@
-import {
-  Component, HostListener
-} from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { animations } from './reusables/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.less',
+    animations: [animations]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   protected isNavbarScrolled: boolean = false;
+  protected isPlayingIntro: boolean = true;
 
   constructor(private routerService: Router) {}
+
+  public ngOnInit(): void {
+    this.playIntro();
+  }
 
   /**
    * Handles the window scroll event to update the `isNavbarScrolled` property.
@@ -30,5 +35,10 @@ export class AppComponent {
    */
   protected get currentRoute(): string {
     return this.routerService.url;
+  }
+
+  protected playIntro() {
+    this.isPlayingIntro = true;
+    setTimeout(() => (this.isPlayingIntro = false), 2000);
   }
 }

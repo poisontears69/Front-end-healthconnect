@@ -1,5 +1,10 @@
-<div class="spinner-fullscreen" *ngIf="visibility">
+<div
+  class="spinner-fullscreen"
+  *ngIf="loading"
+  [@spinnerFade]="visibility ? 'visible' : 'hidden'"
+>
   <div class="spinner-centered">
-    <img src="assets/spinner.png" alt="spinner" />
+    <img class="rotate" src="assets/spinner.png" alt="spinner" *ngIf="!intro" />
+    <img src="favicon.ico" alt="spinner" *ngIf="intro" />
   </div>
 </div>

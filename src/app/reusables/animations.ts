@@ -37,4 +37,15 @@ export const animations = [
       ),
     ]),
   ]),
+
+  //Spinner fade animation
+ trigger('spinnerFade', [
+    state('visible', style({ opacity: 1 })),
+    state('hidden', style({ opacity: 0 })),
+    transition('visible => hidden', animate('300ms ease-out')),
+    transition(':enter', [ // Entry animation
+      style({ opacity: 0 }),
+      animate('300ms ease-in', style({ opacity: 1 }))
+    ])
+  ]) 
 ];
