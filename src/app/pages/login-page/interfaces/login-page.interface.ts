@@ -8,8 +8,13 @@ export interface LoginFormGroupInterface {
 export interface SignUpFormGroupInterface {
   username: FormControl<string | null>;
   email: FormControl<string | null>;
+  phoneNumber: FormControl<string | null>;
   password: FormControl<string | null>;
   confirmPassword: FormControl<string | null>;
+}
+
+export interface SignUpFormPhase2GroupInterface {
+  isDoctor: FormControl<boolean | null>;
 }
 
 export interface ForgotPasswordFormGroupInterface {

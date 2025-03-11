@@ -9,6 +9,10 @@
   gap: 30px;
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
+
   .login-image {
     width: 50%;
     overflow: hidden;
@@ -23,8 +27,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    @media (min-width: 769px) {
+      width: 50%;
+    }
 
     .login-content {
       width: 80%;
@@ -122,16 +133,20 @@
   align-items: center;
   background-color: white;
   border-radius: 15px;
-  height: 600px;
+  height: 700px;
   gap: 30px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
 
   .signup-image {
     width: 50%;
     overflow: hidden;
 
     img {
-      width: 400px;
+      width: 470px;
       object-fit: scale-down;
     }
   }
@@ -142,6 +157,14 @@
     align-items: center;
     width: 50%;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    @media (min-width: 769px) {
+      width: 50%;
+    }
 
     .signup-content {
       width: 80%;
@@ -218,6 +241,127 @@
   }
 }
 
+// signup-phase-2 phase 2 style
+.signup-phase-2-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 15px;
+  height: 700px;
+  gap: 30px;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
+
+  .signup-phase-2-image {
+    width: 50%;
+    overflow: hidden;
+
+    img {
+      width: 470px;
+      object-fit: scale-down;
+    }
+  }
+
+  .main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    @media (min-width: 769px) {
+      width: 50%;
+    }
+
+    .signup-phase-2-content {
+      width: 80%;
+      padding: 20px;
+      background-color: white;
+      border-radius: 5px;
+      box-sizing: border-box;
+
+      .signup-phase-2-title {
+        font-family: "Jost", sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: -5px;
+      }
+
+      .signup-phase-2-subtitle {
+        font-family: "Jost", sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        margin-bottom: 10px;
+      }
+
+      .label-flex {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: -10px;
+        gap: 5px;
+
+        .input-label {
+          font-family: "Jost", sans-serif;
+          font-size: 12px;
+        }
+
+        .required {
+          color: red;
+        }
+      }
+
+      .radio-group {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+
+        .radio-option {
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          font-family: "Jost", sans-serif;
+          font-size: 12px;
+          gap: 5px;
+        }
+      }
+
+      .signup-phase-2-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #205781;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 20px 0;
+        border-radius: 10px;
+      }
+
+      .go-back {
+        width: 100%;
+        padding: 10px;
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+        border-radius: 10px;
+      }
+    }
+  }
+}
+
 // forgot-password style
 .forgot-password-container {
   display: flex;
@@ -228,6 +372,10 @@
   height: 600px;
   gap: 30px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
 
   .forgot-password-image {
     width: 50%;
@@ -245,6 +393,14 @@
     align-items: center;
     width: 50%;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    @media (min-width: 769px) {
+      width: 50%;
+    }
 
     .forgot-password-content {
       width: 80%;

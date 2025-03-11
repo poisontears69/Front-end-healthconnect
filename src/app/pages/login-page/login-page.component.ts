@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { animations } from '../../reusables/animations';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginFormGroupInterface } from './interfaces/login-page.interface';
+import { ForgotPasswordFormGroupInterface, LoginFormGroupInterface, SignUpFormGroupInterface, SignUpFormPhase2GroupInterface } from './interfaces/login-page.interface';
+import { MobileViewService } from '../../reusables/services/mobile-view.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,16 +13,22 @@ import { LoginFormGroupInterface } from './interfaces/login-page.interface';
 })
 export class LoginPageComponent implements OnInit {
   protected loginForm!: FormGroup<LoginFormGroupInterface>;
-  protected signupForm!: FormGroup;
-  protected forgotPasswordForm!: FormGroup;
+  protected signupForm!: FormGroup<SignUpFormGroupInterface>;
+  protected signupPhase2Form!: FormGroup<SignUpFormPhase2GroupInterface>;
+  protected forgotPasswordForm!: FormGroup<ForgotPasswordFormGroupInterface>;
   protected buttonState: string[] = new Array(2).fill('normal');
   protected errorState: string[] = new Array(2).fill('');
   protected isCreateAccount: boolean = false;
   protected isForgotPassword: boolean = false;
   protected isLoading: boolean = false;
   protected isPlayingIntro: boolean = true;
+  protected isMobileView: boolean = false;
+  protected isCreateAccountPhase2: boolean = false;
 
-  constructor(private readonly routerService: Router) {}
+  constructor(
+    private readonly routerService: Router,
+    private readonly mobileViewService: MobileViewService
+  ) {}
 
   /**
    * Lifecycle hook that is called after data-bound properties of a directive are initialized.
@@ -34,6 +41,12 @@ export class LoginPageComponent implements OnInit {
   public ngOnInit(): void {
     this.playIntro();
     this.initializeForm();
+    this.isMobileView = this.mobileViewService?.isMobileView;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.isMobileView = this.mobileViewService?.isMobileView;
   }
 
   /**
@@ -61,8 +74,13 @@ export class LoginPageComponent implements OnInit {
     this.signupForm = new FormGroup({
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
+      phoneNumber: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required),
+    });
+
+    this.signupPhase2Form = new FormGroup({
+      isDoctor: new FormControl(false, Validators.required),
     });
 
     this.forgotPasswordForm = new FormGroup({
@@ -108,7 +126,11 @@ export class LoginPageComponent implements OnInit {
       this.toggleSpinner();
       // Perform your login logic here, e.g., call an authentication service.
     } else {
-      console.log('Form is invalid.' + this.loginForm.get('email')?.value + this.loginForm.get('password')?.value);
+      console.log(
+        'Form is invalid.' +
+          this.loginForm.get('email')?.value +
+          this.loginForm.get('password')?.value
+      );
       // Optionally, mark all fields as touched to trigger validation messages
       this.loginForm.markAllAsTouched();
     }
@@ -119,6 +141,15 @@ export class LoginPageComponent implements OnInit {
    * Currently toggles the loading spinner.
    */
   protected onClickSignup(): void {
+    this.isCreateAccount = false;
+    this.isCreateAccountPhase2 = true;
+  }
+
+  /**
+   * Handles the sign-up button click event.
+   * Currently toggles the loading spinner.
+   */
+  protected onClickFinalizedSignup(): void {
     this.toggleSpinner();
   }
 
@@ -144,6 +175,22 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.isCreateAccount = !this.isCreateAccount;
+  }
+
+  /**
+   * Toggles between the Create Account and Login views.
+   * Resets the button and error states based on the active view.
+   */
+  protected onClickGoToFinalizedCreateOrLogin(): void {
+    if (this.isCreateAccountPhase2) {
+      this.buttonState = new Array(2).fill('normal');
+      this.errorState = new Array(4).fill('');
+    } else {
+      this.buttonState = new Array(2).fill('normal');
+      this.errorState = new Array(2).fill('');
+    }
+
+    this.isCreateAccountPhase2 = !this.isCreateAccountPhase2;
   }
 
   /**
