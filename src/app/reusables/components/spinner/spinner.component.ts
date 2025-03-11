@@ -11,6 +11,7 @@ export class SpinnerComponent implements OnChanges {
   @Input() visibility = false;
   @Input() intro = false;
   protected loading = false;
+  protected introduction = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['visibility']) {
@@ -18,6 +19,13 @@ export class SpinnerComponent implements OnChanges {
         this.loading = true;
       } else {
         setTimeout(() => (this.loading = false), 300);
+      }
+    }
+    if (changes['intro']) {
+      if (changes['intro'].currentValue) {
+        this.introduction = true;
+      } else {
+        setTimeout(() => (this.introduction = false), 300);
       }
     }
   }
