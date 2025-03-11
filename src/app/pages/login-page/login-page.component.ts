@@ -23,11 +23,35 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private readonly routerService: Router) {}
 
+  /**
+   * Lifecycle hook that is called after data-bound properties of a directive are initialized.
+   * This method is used to perform any necessary setup or initialization for the component.
+   * 
+   * In this implementation, it calls two methods:
+   * 1. `playIntro()`: Plays the introductory animation or sequence.
+   * 2. `initializeForm()`: Sets up the form controls and validation.
+   */
   public ngOnInit(): void {
     this.playIntro();
     this.initializeForm();
   }
 
+  /**
+   * Initializes the forms used in the login page component.
+   *
+   * - `loginForm`: Form group for user login containing:
+   *   - `email`: A required email field.
+   *   - `password`: A required password field.
+   *
+   * - `signupForm`: Form group for user signup containing:
+   *   - `username`: A required username field.
+   *   - `email`: A required email field.
+   *   - `password`: A required password field.
+   *   - `confirmPassword`: A required confirm password field.
+   *
+   * - `forgotPasswordForm`: Form group for password recovery containing:
+   *   - `email`: A required email field.
+   */
   private initializeForm(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -130,6 +154,14 @@ export class LoginPageComponent implements OnInit {
     setTimeout(() => (this.isLoading = false), 3000);
   }
 
+  /**
+   * Plays the introductory animation or sequence.
+   *
+   * This method sets the `isPlayingIntro` and `isLoading` flags to `true`,
+   * then waits for 2 seconds before setting them back to `false`.
+   *
+   * @protected
+   */
   protected playIntro() {
     this.isPlayingIntro = true;
     this.isLoading = true;
