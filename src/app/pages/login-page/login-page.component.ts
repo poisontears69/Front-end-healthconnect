@@ -112,7 +112,7 @@ export class LoginPageComponent implements OnInit {
     );
 
     this.signupPhase2Form = new FormGroup<SignUpFormPhase2GroupInterface>({
-      role: new FormControl(Role.PATIENT, Validators.required),
+      role: new FormControl(null, Validators.required),
     });
 
     this.forgotPasswordForm = new FormGroup<ForgotPasswordFormGroupInterface>({
@@ -168,7 +168,6 @@ export class LoginPageComponent implements OnInit {
    */
   protected onClickLogin(): void {
     if (this.loginForm.valid) {
-      console.log('Form Value:', this.loginForm.value);
       this.toggleSpinner();
       // Perform your login logic here, e.g., call an authentication service.
     } else {
@@ -187,7 +186,6 @@ export class LoginPageComponent implements OnInit {
    * Currently toggles the loading spinner.
    */
   protected onClickSignup(): void {
-    console.log(this.signupForm.value);
     this.isSubmitClicked = true;
 
     if (
@@ -209,26 +207,22 @@ export class LoginPageComponent implements OnInit {
    * Currently toggles the loading spinner.
    */
   protected onClickFinalizedSignup(): void {
-    console.log(this.signupForm.value);
-    console.log(this.signupPhase2Form.value);
+    const role = this.signupPhase2Form.get('role')?.value;
     const payload: SignUpPayloadInterface = {
       username: this.signupForm.get('username')?.value || '',
       email: this.signupForm.get('email')?.value || '',
       contactNumber: this.signupForm.get('phoneNumber')?.value || '',
       password: this.signupForm.get('password')?.value || '',
-      role:
-        this.signupPhase2Form.get('role')?.value?.toUpperCase() || Role.PATIENT,
+      role: role?.toUpperCase() || Role.PATIENT,
     };
 
-    payload.role &&
+    role &&
       this.createAccountService.registerUser(payload).subscribe({
         next: (response) => {
           console.log('Registration successful!', response);
-          // Handle success (e.g., redirect user)
         },
         error: (err) => {
-          console.error('Registration failed:', err.message);
-          // Handle error (e.g., show error message)
+          alert('Registration failed:' + err.message);
         },
       });
   }
