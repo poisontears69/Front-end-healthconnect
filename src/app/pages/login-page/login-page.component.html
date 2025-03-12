@@ -42,15 +42,15 @@
 
         <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
           <div class="label-flex">
-            <p class="input-label">Email</p>
+            <p class="input-label">Username</p>
             <p class="required">*</p>
           </div>
           <input
-            type="email"
+            type="username"
             class="login-input"
-            placeholder="Enter your email"
-            formControlName="email"
-            autocomplete="email"
+            placeholder="Enter your username"
+            formControlName="username"
+            autocomplete="username"
             [@inputError]="errorState[0]"
             (blur)="showError(0)"
           />

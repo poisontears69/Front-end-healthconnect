@@ -2,7 +2,7 @@ import { FormControl } from '@angular/forms';
 import { Role } from '../enum/login-page.enum';
 
 export interface LoginFormGroupInterface {
-  email: FormControl<string | null>;
+  username: FormControl<string | null>;
   password: FormControl<string | null>;
 }
 

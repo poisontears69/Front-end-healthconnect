@@ -17,8 +17,11 @@ import {
 } from './interfaces/login-page.interface';
 import { MobileViewService } from '../../reusables/services/mobile-view.service';
 import { Role } from './enum/login-page.enum';
-import { CreateAccountService } from '../../reusables/services/create-account.service';
-import { SignUpPayloadInterface } from './interfaces/user-data-payload.interface';
+import { UserService } from '../../reusables/services/user.service';
+import {
+  LogInPayloadInterface,
+  SignUpPayloadInterface,
+} from './interfaces/user-data-payload.interface';
 
 @Component({
   selector: 'app-login-page',
@@ -45,7 +48,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private readonly routerService: Router,
     private readonly mobileViewService: MobileViewService,
-    private readonly createAccountService: CreateAccountService
+    private readonly userService: UserService
   ) {}
 
   /**
@@ -85,7 +88,7 @@ export class LoginPageComponent implements OnInit {
    */
   private initializeForm(): void {
     this.loginForm = new FormGroup<LoginFormGroupInterface>({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
 
@@ -168,15 +171,21 @@ export class LoginPageComponent implements OnInit {
    */
   protected onClickLogin(): void {
     if (this.loginForm.valid) {
-      this.toggleSpinner();
-      // Perform your login logic here, e.g., call an authentication service.
+      const payload: LogInPayloadInterface = {
+        username: this.loginForm.get('username')?.value || '',
+        password: this.loginForm.get('password')?.value || '',
+      };
+
+      this.userService.loginUser(payload).subscribe({
+        next: (response) => {
+          console.log('Registration successful!', response);
+        },
+        error: (err) => {
+          alert('Login failed:' + err.message);
+        },
+      });
+      // this.toggleSpinner();
     } else {
-      console.log(
-        'Form is invalid.' +
-          this.loginForm.get('email')?.value +
-          this.loginForm.get('password')?.value
-      );
-      // Optionally, mark all fields as touched to trigger validation messages
       this.loginForm.markAllAsTouched();
     }
   }
@@ -217,7 +226,7 @@ export class LoginPageComponent implements OnInit {
     };
 
     role &&
-      this.createAccountService.registerUser(payload).subscribe({
+      this.userService.registerUser(payload).subscribe({
         next: (response) => {
           console.log('Registration successful!', response);
         },
