@@ -1,9 +1,24 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { animations } from '../../reusables/animations';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ForgotPasswordFormGroupInterface, LoginFormGroupInterface, SignUpFormGroupInterface, SignUpFormPhase2GroupInterface } from './interfaces/login-page.interface';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import {
+  ForgotPasswordFormGroupInterface,
+  LoginFormGroupInterface,
+  SignUpFormGroupInterface,
+  SignUpFormPhase2GroupInterface,
+} from './interfaces/login-page.interface';
 import { MobileViewService } from '../../reusables/services/mobile-view.service';
+import { Role } from './enum/login-page.enum';
+import { CreateAccountService } from '../../reusables/services/create-account.service';
+import { SignUpPayloadInterface } from './interfaces/user-data-payload.interface';
 
 @Component({
   selector: 'app-login-page',
@@ -24,10 +39,13 @@ export class LoginPageComponent implements OnInit {
   protected isPlayingIntro: boolean = true;
   protected isMobileView: boolean = false;
   protected isCreateAccountPhase2: boolean = false;
+  protected isSubmitClicked: boolean = false;
+  protected showErrorModal = false;
 
   constructor(
     private readonly routerService: Router,
-    private readonly mobileViewService: MobileViewService
+    private readonly mobileViewService: MobileViewService,
+    private readonly createAccountService: CreateAccountService
   ) {}
 
   /**
@@ -66,24 +84,38 @@ export class LoginPageComponent implements OnInit {
    *   - `email`: A required email field.
    */
   private initializeForm(): void {
-    this.loginForm = new FormGroup({
+    this.loginForm = new FormGroup<LoginFormGroupInterface>({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
     });
 
-    this.signupForm = new FormGroup({
-      username: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
+    const passwordMatchValidator: ValidatorFn = (
+      control: AbstractControl
+    ): ValidationErrors | null => {
+      const password = control.get('password');
+      const confirmPassword = control.get('confirmPassword');
+
+      return password?.value === confirmPassword?.value
+        ? null
+        : { passwordMismatch: true };
+    };
+
+    this.signupForm = new FormGroup<SignUpFormGroupInterface>(
+      {
+        username: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        phoneNumber: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
+        confirmPassword: new FormControl('', Validators.required),
+      },
+      { validators: passwordMatchValidator }
+    );
+
+    this.signupPhase2Form = new FormGroup<SignUpFormPhase2GroupInterface>({
+      role: new FormControl(Role.PATIENT, Validators.required),
     });
 
-    this.signupPhase2Form = new FormGroup({
-      isDoctor: new FormControl('', Validators.required),
-    });
-
-    this.forgotPasswordForm = new FormGroup({
+    this.forgotPasswordForm = new FormGroup<ForgotPasswordFormGroupInterface>({
       email: new FormControl('', [Validators.required, Validators.email]),
     });
   }
@@ -95,6 +127,20 @@ export class LoginPageComponent implements OnInit {
    */
   protected onButtonHover(index: number) {
     this.buttonState[index] = 'hovered';
+  }
+
+  protected checkSignupFormValidations(value: string): void {
+    const control = this.signupForm?.get(value);
+
+    if (control) {
+      const currentValue = control.value ?? '';
+      const sanitizedValue = currentValue.toString().replaceAll(' ', '');
+      control.setValue(sanitizedValue, { emitEvent: false });
+
+      if (sanitizedValue === '') {
+        control.markAsUntouched();
+      }
+    }
   }
 
   /**
@@ -141,8 +187,21 @@ export class LoginPageComponent implements OnInit {
    * Currently toggles the loading spinner.
    */
   protected onClickSignup(): void {
-    this.isCreateAccount = false;
-    this.isCreateAccountPhase2 = true;
+    console.log(this.signupForm.value);
+    this.isSubmitClicked = true;
+
+    if (
+      this.signupForm?.valid &&
+      this.checkIsPasswordMatch() &&
+      this.checkIsPasswordValid()
+    ) {
+      this.isCreateAccount = false;
+      this.isCreateAccountPhase2 = true;
+      this.isSubmitClicked = false;
+    } else {
+      this.openModal();
+      this.loginForm.markAllAsTouched();
+    }
   }
 
   /**
@@ -150,7 +209,67 @@ export class LoginPageComponent implements OnInit {
    * Currently toggles the loading spinner.
    */
   protected onClickFinalizedSignup(): void {
-    this.toggleSpinner();
+    console.log(this.signupForm.value);
+    console.log(this.signupPhase2Form.value);
+    const payload: SignUpPayloadInterface = {
+      username: this.signupForm.get('username')?.value || '',
+      email: this.signupForm.get('email')?.value || '',
+      contactNumber: this.signupForm.get('phoneNumber')?.value || '',
+      password: this.signupForm.get('password')?.value || '',
+      role:
+        this.signupPhase2Form.get('role')?.value?.toUpperCase() || Role.PATIENT,
+    };
+
+    payload.role &&
+      this.createAccountService.registerUser(payload).subscribe({
+        next: (response) => {
+          console.log('Registration successful!', response);
+          // Handle success (e.g., redirect user)
+        },
+        error: (err) => {
+          console.error('Registration failed:', err.message);
+          // Handle error (e.g., show error message)
+        },
+      });
+  }
+
+  protected checkIsValidUsername(): boolean {
+    const username = this.signupForm.get('username');
+    return username?.valid || false;
+  }
+
+  protected checkIsValidEmail(): boolean {
+    const email = this.signupForm.get('email');
+    return email?.valid || false;
+  }
+
+  protected checkIsPasswordMatch(): boolean {
+    return (
+      this.signupForm.get('password')?.value ===
+      this.signupForm.get('confirmPassword')?.value
+    );
+  }
+
+  protected checkIsPasswordValid(): boolean {
+    const password = this.signupForm.get('password')?.value || '';
+    const confirmPassword = this.signupForm.get('confirmPassword')?.value || '';
+
+    // Check for non-empty fields
+    if (password === '' || confirmPassword === '') {
+      return false;
+    }
+
+    // Check password requirements
+    const hasMinimumLength = password.length > 6;
+    const hasAlphabet = /[a-zA-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+
+    return hasMinimumLength && hasAlphabet && hasNumber;
+  }
+
+  protected checkIsPhoneNumberValid(): boolean {
+    const phoneNumber = this.signupForm.get('phoneNumber')?.value;
+    return phoneNumber?.length === 10;
   }
 
   /**
@@ -224,5 +343,13 @@ export class LoginPageComponent implements OnInit {
       this.isPlayingIntro = false;
       this.isLoading = false;
     }, 2000);
+  }
+
+  openModal() {
+    this.showErrorModal = true;
+  }
+
+  closeModal() {
+    this.showErrorModal = false;
   }
 }

@@ -1,4 +1,5 @@
-import { FormControl } from "@angular/forms";
+import { FormControl } from '@angular/forms';
+import { Role } from '../enum/login-page.enum';
 
 export interface LoginFormGroupInterface {
   email: FormControl<string | null>;
@@ -14,7 +15,7 @@ export interface SignUpFormGroupInterface {
 }
 
 export interface SignUpFormPhase2GroupInterface {
-  isDoctor: FormControl<string | null>;
+  role: FormControl<Role | null>;
 }
 
 export interface ForgotPasswordFormGroupInterface {
