@@ -40,13 +40,22 @@
         <h1 class="login-title">Sign In</h1>
         <h2 class="login-subtitle">Unlock your world.</h2>
 
+        <div
+          class="error-box"
+          *ngIf="isInvalidLogin"
+        >
+          <p class="error-message">
+            Invalid username or password.
+          </p>
+        </div>
+
         <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
           <div class="label-flex">
             <p class="input-label">Username</p>
             <p class="required">*</p>
           </div>
           <input
-            type="username"
+            type="text"
             class="login-input"
             placeholder="Enter your username"
             formControlName="username"

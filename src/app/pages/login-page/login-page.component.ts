@@ -44,6 +44,7 @@ export class LoginPageComponent implements OnInit {
   protected isCreateAccountPhase2: boolean = false;
   protected isSubmitClicked: boolean = false;
   protected showErrorModal = false;
+  protected isInvalidLogin = false;
 
   constructor(
     private readonly routerService: Router,
@@ -170,21 +171,27 @@ export class LoginPageComponent implements OnInit {
    * Also toggles the loading spinner for a set duration.
    */
   protected onClickLogin(): void {
+    this.isInvalidLogin = false;
+    this.isSubmitClicked = true;
+
     if (this.loginForm.valid) {
       const payload: LogInPayloadInterface = {
         username: this.loginForm.get('username')?.value || '',
         password: this.loginForm.get('password')?.value || '',
       };
 
+      this.isLoading = true;
       this.userService.loginUser(payload).subscribe({
         next: (response) => {
+          this.isLoading = false;
           console.log('Registration successful!', response);
         },
-        error: (err) => {
-          alert('Login failed:' + err.message);
+        error: () => {
+          this.isLoading = false;
+          this.isInvalidLogin = true;
         },
       });
-      // this.toggleSpinner();
+      this.toggleSpinner();
     } else {
       this.loginForm.markAllAsTouched();
     }
@@ -225,12 +232,15 @@ export class LoginPageComponent implements OnInit {
       role: role?.toUpperCase() || Role.PATIENT,
     };
 
+    this.isLoading = true;
     role &&
       this.userService.registerUser(payload).subscribe({
         next: (response) => {
+          this.isLoading = false;
           console.log('Registration successful!', response);
         },
         error: (err) => {
+          this.isLoading = false;
           alert('Registration failed:' + err.message);
         },
       });
