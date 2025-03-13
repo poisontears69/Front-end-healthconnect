@@ -24,7 +24,7 @@ export class MainPageComponent implements OnInit {
     },
     {
       clinic: 'Third Clinic',
-      doctor: 'Dr. Hugh Mungus',
+      doctor: 'Dr. Hugh Janus',
       description: 'Cock inspector',
     },
   ];

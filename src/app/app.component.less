@@ -1,13 +1,16 @@
 .header-bar {
+  position: absolute;
   background-color: #205781;
-  height: 80px;
+  height: 95px;
   width: 100%;
   transition: all 0.6s ease;
+  z-index: 100;
 
-  // &.scrolled {
-  //   position: fixed;
-  //   transform: translateY(-10px);
-  // }
+  &.scrolled {
+    position: fixed;
+    transform: translateY(-10px);
+    opacity: 97%;
+  }
 
   .header-content {
     display: flex;
@@ -22,12 +25,23 @@
       color: white;
       font-size: 16px;
     }
+
+    .header-menu {
+      display: flex;
+      gap: 40px;
+
+      img {
+        height: 24px;
+        width: 24px;
+      }
+    }
   }
 }
 
 .content-body {
   background-color: #4F959D;
   padding: 2% 15%;
+  padding-top: 140px;
 }
 
 .login-body {

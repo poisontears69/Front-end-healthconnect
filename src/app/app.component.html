@@ -1,7 +1,14 @@
-<div [ngClass]="isNavbarScrolled ? 'header-bar scrolled' : 'header-bar'" *ngIf="currentRoute !== '/'">
+<div
+  [ngClass]="isNavbarScrolled ? 'header-bar scrolled' : 'header-bar'"
+  *ngIf="currentRoute !== '/'"
+>
   <div class="header-content">
     <div class="logo">
       <h1>HealthConnect</h1>
+    </div>
+    <div class="header-menu">
+      <img src="assets/notification.png" alt="Notification" />
+      <img src="assets/menu.png" alt="Menu" />
     </div>
   </div>
 </div>
