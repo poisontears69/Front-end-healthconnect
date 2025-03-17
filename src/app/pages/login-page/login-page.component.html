@@ -7,10 +7,13 @@
   class="modal-backdrop"
   (click)="closeModal()"
   (keypress)="closeModal()"
-  *ngIf="showErrorModal && isMobileView"
+  *ngIf="showErrorModal && isMobileView && isSubmitClicked"
 >
   <div class="error-modal">
-    <ng-container *ngIf="signupForm.invalid && isSubmitClicked">
+    <p class="error-message" *ngIf="!isUsernameNotTaken">
+      This username has already been taken.
+    </p>
+    <ng-container *ngIf="signupForm.invalid">
       <p class="error-message" *ngIf="!checkIsValidUsername()">
         Invalid username.
       </p>
@@ -40,13 +43,8 @@
         <h1 class="login-title">Sign In</h1>
         <h2 class="login-subtitle">Unlock your world.</h2>
 
-        <div
-          class="error-box"
-          *ngIf="isInvalidLogin"
-        >
-          <p class="error-message">
-            Invalid username or password.
-          </p>
+        <div class="error-box" *ngIf="isInvalidLogin">
+          <p class="error-message">Invalid username or password.</p>
         </div>
 
         <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
@@ -161,6 +159,12 @@
             [@inputError]="errorState[0]"
             (blur)="showError(0); checkSignupFormValidations('username')"
           />
+          <div
+            class="username-taken"
+            *ngIf="!isUsernameNotTaken && !isMobileView"
+          >
+            <p>This username has already been taken.</p>
+          </div>
 
           <div class="label-flex">
             <p class="input-label">Email</p>

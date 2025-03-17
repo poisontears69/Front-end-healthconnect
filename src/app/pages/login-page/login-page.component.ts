@@ -22,6 +22,7 @@ import {
   LogInPayloadInterface,
   SignUpPayloadInterface,
 } from './interfaces/user-data-payload.interface';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -36,6 +37,7 @@ export class LoginPageComponent implements OnInit {
   protected forgotPasswordForm!: FormGroup<ForgotPasswordFormGroupInterface>;
   protected buttonState: string[] = new Array(2).fill('normal');
   protected errorState: string[] = new Array(2).fill('');
+  protected showErrorModal = false;
   protected isCreateAccount: boolean = false;
   protected isForgotPassword: boolean = false;
   protected isLoading: boolean = false;
@@ -43,8 +45,8 @@ export class LoginPageComponent implements OnInit {
   protected isMobileView: boolean = false;
   protected isCreateAccountPhase2: boolean = false;
   protected isSubmitClicked: boolean = false;
-  protected showErrorModal = false;
   protected isInvalidLogin = false;
+  protected isUsernameNotTaken = true;
 
   constructor(
     private readonly routerService: Router,
@@ -201,21 +203,32 @@ export class LoginPageComponent implements OnInit {
    * Handles the sign-up button click event.
    * Currently toggles the loading spinner.
    */
-  protected onClickSignup(): void {
-    this.isSubmitClicked = true;
+  protected async onClickSignup(): Promise<void> {
+    this.checkIsUsernameNotTaken(
+      this.signupForm?.get('username')?.value as string
+    )
+      .then(() => {
+        this.isSubmitClicked = true;
 
-    if (
-      this.signupForm?.valid &&
-      this.checkIsPasswordMatch() &&
-      this.checkIsPasswordValid()
-    ) {
-      this.isCreateAccount = false;
-      this.isCreateAccountPhase2 = true;
-      this.isSubmitClicked = false;
-    } else {
-      this.openModal();
-      this.loginForm.markAllAsTouched();
-    }
+        if (
+          this.signupForm?.valid &&
+          this.checkIsPasswordMatch() &&
+          this.checkIsPasswordValid() &&
+          this.isUsernameNotTaken
+        ) {
+          this.isCreateAccount = false;
+          this.isCreateAccountPhase2 = true;
+          this.isSubmitClicked = false;
+        } else {
+          this.openModal();
+          this.loginForm.markAllAsTouched();
+        }
+      })
+      .catch(() => {
+        this.isSubmitClicked = true;
+        this.openModal();
+        this.loginForm.markAllAsTouched();
+      });
   }
 
   /**
@@ -249,6 +262,17 @@ export class LoginPageComponent implements OnInit {
   protected checkIsValidUsername(): boolean {
     const username = this.signupForm.get('username');
     return username?.valid || false;
+  }
+
+  protected async checkIsUsernameNotTaken(username: string): Promise<void> {
+    return firstValueFrom(this.userService.checkUsernameAvailability(username))
+      .then((isNotTaken) => {
+        this.isUsernameNotTaken = isNotTaken;
+      })
+      .catch((error) => {
+        this.isUsernameNotTaken = true;
+        alert('Error validating username: ' + (error as Error).message);
+      });
   }
 
   protected checkIsValidEmail(): boolean {
