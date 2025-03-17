@@ -16,6 +16,7 @@ export interface SignUpFormGroupInterface {
 
 export interface SignUpFormPhase2GroupInterface {
   role: FormControl<Role | null>;
+  otp: FormControl<string | null>;
 }
 
 export interface ForgotPasswordFormGroupInterface {

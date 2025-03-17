@@ -256,7 +256,7 @@
       <div class="signup-phase-2-content">
         <h1 class="signup-phase-2-title">Finalizing Sign Up</h1>
         <h2 class="signup-phase-2-subtitle">
-          Almost there! Just one more question to go.
+          Almost there! We also sent you a verification code through email.
         </h2>
 
         <form
@@ -290,6 +290,19 @@
               <label for="doctor">Doctor</label>
             </div>
           </div>
+
+          <div class="label-flex">
+            <p class="input-label">Email Verification</p>
+            <p class="required">*</p>
+          </div>
+
+          <input
+            type="text"
+            class="signup-phase-2-input"
+            placeholder="Enter your OTP code number"
+            formControlName="otp"
+            autocomplete="off"
+          />
 
           <button
             type="submit"

@@ -12,3 +12,8 @@ export interface LogInPayloadInterface {
   username: string;
   password: string;
 }
+
+export interface EmailVerificationPayloadInterface {
+  email: string;
+  otp: string;
+}

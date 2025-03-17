@@ -23,6 +23,7 @@ import {
   SignUpPayloadInterface,
 } from './interfaces/user-data-payload.interface';
 import { firstValueFrom } from 'rxjs';
+import { OneTimePinService } from '../../reusables/services/otp.service';
 
 @Component({
   selector: 'app-login-page',
@@ -51,7 +52,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private readonly routerService: Router,
     private readonly mobileViewService: MobileViewService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly oneTimePinService: OneTimePinService
   ) {}
 
   /**
@@ -119,6 +121,7 @@ export class LoginPageComponent implements OnInit {
 
     this.signupPhase2Form = new FormGroup<SignUpFormPhase2GroupInterface>({
       role: new FormControl(null, Validators.required),
+      otp: new FormControl('', Validators.required),
     });
 
     this.forgotPasswordForm = new FormGroup<ForgotPasswordFormGroupInterface>({
@@ -216,6 +219,16 @@ export class LoginPageComponent implements OnInit {
           this.checkIsPasswordValid() &&
           this.isUsernameNotTaken
         ) {
+          this.oneTimePinService
+            .sendEmailVerification(
+              this.signupForm?.get('email')?.value as string
+            )
+            .subscribe({
+              next: (response) =>
+                console.log('Email sent successfully', response),
+              error: (err) => console.error('Error sending email', err),
+            });
+
           this.isCreateAccount = false;
           this.isCreateAccountPhase2 = true;
           this.isSubmitClicked = false;
