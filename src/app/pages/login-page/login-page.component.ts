@@ -189,6 +189,7 @@ export class LoginPageComponent implements OnInit {
       this.userService.loginUser(payload).subscribe({
         next: (response) => {
           this.isLoading = false;
+          this.routerService.navigate(["/home"]);
           console.log('Registration successful!', response);
         },
         error: () => {
@@ -196,7 +197,6 @@ export class LoginPageComponent implements OnInit {
           this.isInvalidLogin = true;
         },
       });
-      this.toggleSpinner();
     } else {
       this.loginForm.markAllAsTouched();
     }
