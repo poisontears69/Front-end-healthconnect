@@ -1,0 +1,28 @@
+<div class="main-container">
+  <div class="search-container">
+    <form [formGroup]="searchBarFormGroup">
+      <input
+        type="search"
+        class="search-clinics-input"
+        placeholder="Search Clinics"
+        formControlName="searchBar"
+        autocomplete="off"
+        (keyup.enter)="onSearchSubmit()"
+      />
+    </form>
+  </div>
+  <ng-container *ngFor="let card of clinicsData">
+    <div class="flex-container">
+      <ng-container *ngFor="let card of clinicsData">
+        <div class="card-container">
+          <div class="card-content">
+            <img src="assets/sign-in-banner.jpg" alt="Banner" />
+            <h1>{{ card.clinic }}</h1>
+            <h2>{{ card.doctor }}</h2>
+            <p>{{ card.description }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

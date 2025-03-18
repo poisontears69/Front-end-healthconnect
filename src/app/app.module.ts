@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -8,9 +7,10 @@ import { SharedModule } from './reusables/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MainPageComponent } from './pages/main-page/main-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent],
+  declarations: [AppComponent, LoginPageComponent, MainPageComponent],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
