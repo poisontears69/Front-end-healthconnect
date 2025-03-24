@@ -8,12 +8,12 @@ import {
 import { ClinicsService } from '../../reusables/services/clinics.service';
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.less',
+  selector: 'app-clinic-page',
+  templateUrl: './clinic-page.component.html',
+  styleUrl: './clinic-page.component.less',
   animations: [animations],
 })
-export class MainPageComponent implements OnInit {
+export class ClinicPageComponent implements OnInit {
   protected searchBarFormGroup!: FormGroup<SearchBarFormGroup>;
   protected clinicsData!: ClinicsDataInterface[];
 

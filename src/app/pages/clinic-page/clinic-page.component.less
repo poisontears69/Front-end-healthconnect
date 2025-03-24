@@ -1,0 +1,131 @@
+.main-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-height: 75lvh;
+  gap: 220px;
+
+  .header-banner {
+    display: flex;
+    width: 100%;
+
+    .cover-photo {
+      height: 300px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .header-title {
+      display: flex;
+      position: absolute;
+      justify-content: space-between;
+      margin-top: 200px;
+      margin-left: 50px;
+      width: 66vw;
+      gap: 31px;
+
+      .left-container {
+        display: flex;
+        gap: 31px;
+
+        .profile-picture {
+          height: 300px;
+          width: 300px;
+          object-fit: cover;
+          border-radius: 100%;
+        }
+
+        .flex-text {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          flex-direction: column;
+          padding-top: 60px;
+
+          h1 {
+            font-family: Jost, sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            line-height: 0;
+          }
+
+          h2 {
+            font-family: Jost, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            line-height: 0;
+          }
+
+          p {
+            font-family: Jost, sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            line-height: 0;
+          }
+        }
+      }
+
+      .right-container {
+        display: flex;
+        padding-top: 150px;
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 310px;
+          height: 72px;
+          padding: 32px;
+          background-color: #f6f8d5;
+          border: 0;
+          border-radius: 20px;
+          cursor: pointer;
+          gap: 6px;
+
+          img {
+            width: 16px;
+            height: 16px;
+          }
+
+          p {
+            font-family: Jost, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: black;
+            line-height: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .body-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    width: 96vw;
+    background-color: #3e7278;
+    padding: 31px;
+    gap: 31px;
+
+    .left-container {
+      background-color: #4f959d;
+      width: 370px;
+      height: 300px;
+      border-radius: 15px;
+    }
+
+    .right-container {
+      background-color: #4f959d;
+      width: 900px;
+      height: 300px;
+      border-radius: 15px;
+    }
+  }
+}

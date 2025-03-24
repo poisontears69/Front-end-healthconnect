@@ -12,12 +12,17 @@
     </div>
   </div>
 </div>
-<div class="content-body" *ngIf="currentRoute !== '/'">
+<div class="profile-screen" *ngIf="currentRoute === '/clinic'">
   <router-outlet></router-outlet>
 </div>
-<div class="login-body" *ngIf="currentRoute === '/'">
-  <router-outlet></router-outlet>
-</div>
+<ng-container *ngIf="currentRoute !== '/clinic'">
+  <div class="content-body" *ngIf="currentRoute !== '/'">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="login-body" *ngIf="currentRoute === '/'">
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
 <div class="footer-bar" *ngIf="currentRoute !== '/'">
   <div class="footer-content">
     <p>© 2025 HealthConnect. All rights reserved.</p>

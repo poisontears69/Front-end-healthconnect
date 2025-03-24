@@ -11,18 +11,16 @@
       />
     </form>
   </div>
-  <ng-container *ngFor="let card of clinicsData">
-    <div class="flex-container">
-      <ng-container *ngFor="let card of clinicsData">
-        <div class="card-container">
-          <div class="card-content">
-            <img src="assets/sign-in-banner.jpg" alt="Banner" />
-            <h1>{{ card.clinic }}</h1>
-            <h2>{{ card.doctor }}</h2>
-            <p>{{ card.description }}</p>
-          </div>
+  <div class="flex-container">
+    <ng-container *ngFor="let card of clinicsData">
+      <div class="card-container">
+        <div class="card-content">
+          <img src="assets/sign-in-banner.jpg" alt="Banner" />
+          <h1>{{ card?.name }}</h1>
+          <h2>{{ card?.doctorName }}</h2>
+          <p>{{ card?.description }}</p>
         </div>
-      </ng-container>
-    </div>
-  </ng-container>
+      </div>
+    </ng-container>
+  </div>
 </div>
