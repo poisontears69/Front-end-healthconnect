@@ -3,8 +3,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import {
   LogInPayloadInterface,
+  LogInTokenResponseInterface,
   SignUpPayloadInterface,
 } from '../../pages/login-page/interfaces/user-data-payload.interface';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +18,9 @@ export class UserService {
 
   public loginUser(
     userData: LogInPayloadInterface
-  ): Observable<LogInPayloadInterface> {
+  ): Observable<LogInTokenResponseInterface> {
     return this.http
-      .post<LogInPayloadInterface>(this.endpoint + '/login', userData)
+      .post<LogInTokenResponseInterface>(this.endpoint + '/login', userData)
       .pipe(
         catchError((error) => {
           console.error('Registration error:', error);
@@ -59,5 +61,13 @@ export class UserService {
         );
       })
     );
+  }
+
+  public getDecodedAccessToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      return null;
+    }
   }
 }

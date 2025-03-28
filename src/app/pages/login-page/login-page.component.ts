@@ -24,6 +24,8 @@ import {
 } from './interfaces/user-data-payload.interface';
 import { firstValueFrom } from 'rxjs';
 import { OneTimePinService } from '../../reusables/services/otp.service';
+import { CookieService } from 'ngx-cookie-service';
+import { CookieConstants } from '../../constants/cookie.constants';
 
 @Component({
   selector: 'app-login-page',
@@ -53,7 +55,8 @@ export class LoginPageComponent implements OnInit {
     private readonly routerService: Router,
     private readonly mobileViewService: MobileViewService,
     private readonly userService: UserService,
-    private readonly oneTimePinService: OneTimePinService
+    private readonly oneTimePinService: OneTimePinService,
+    private readonly cookieService: CookieService
   ) {}
 
   /**
@@ -189,8 +192,10 @@ export class LoginPageComponent implements OnInit {
       this.userService.loginUser(payload).subscribe({
         next: (response) => {
           this.isLoading = false;
+          
+          this.cookieService.set(CookieConstants.SESSION_STORAGE, JSON.stringify(response));
+      
           this.routerService.navigate(["/home"]);
-          console.log('Registration successful!', response);
         },
         error: () => {
           this.isLoading = false;

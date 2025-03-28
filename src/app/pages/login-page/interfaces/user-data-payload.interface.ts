@@ -13,6 +13,17 @@ export interface LogInPayloadInterface {
   password: string;
 }
 
+export interface LogInTokenInterface { 
+  token: string;
+}
+
+export interface LogInTokenResponseInterface { 
+  sub: string;
+  role: string;
+  iat: string;
+  exp: string;
+}
+
 export interface EmailVerificationPayloadInterface {
   email: string;
   otp: string;

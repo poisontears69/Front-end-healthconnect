@@ -7,11 +7,17 @@ import { SharedModule } from './reusables/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
+import { ClinicPageComponent } from './pages/clinic-page/clinic-page.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
-  declarations: [AppComponent, LoginPageComponent, LandingPageComponent, MainPageComponent],
+  declarations: [
+    AppComponent,
+    LoginPageComponent,
+    MainPageComponent,
+    ClinicPageComponent,
+  ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
@@ -19,6 +25,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
