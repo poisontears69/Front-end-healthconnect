@@ -9,9 +9,13 @@ export const routes: Routes = [
     path: '',
     component: PublicComponent,
     children: [
-      { path: '', component: LandingComponent },
-      { path: 'login', component: LoginPageComponent },
+      { path: '', component: LandingComponent }
     ],
+  },
+  {
+    title: 'HealthConnect',
+    path: 'login',
+    component: LoginPageComponent,
   },
   {
     path: 'patient',
@@ -25,5 +29,5 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/doctor-page/doctor.module').then((m) => m.DoctorModule),
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

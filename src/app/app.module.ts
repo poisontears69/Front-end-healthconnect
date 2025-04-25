@@ -34,15 +34,13 @@ import { MessagesComponent } from './pages/patient-page/component/messages/messa
 import { ProfileDetailsComponent } from './pages/patient-page/component/profile/profile-details/profile-details.component';
 import { ProfileComponent } from './pages/patient-page/component/profile/profile.component';
 import { SearchDoctorComponent } from './pages/patient-page/component/search-doctor/search-doctor.component';
-import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
-import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     LoginPageComponent,
-    AppComponent,
     NavbarComponent,
     LandingComponent,
     MessagesComponentDoctor,
@@ -77,10 +75,8 @@ import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    CalendarModule,
-    ScheduleModule,
   ],
-  providers: [CookieService],
+  providers: [CookieService, provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

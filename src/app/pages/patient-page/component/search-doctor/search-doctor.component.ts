@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-search-doctor',
+  standalone: false,
   templateUrl: './search-doctor.component.html',
   styleUrl: './search-doctor.component.less'
 })

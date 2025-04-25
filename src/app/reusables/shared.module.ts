@@ -9,6 +9,8 @@ import { NavbarLoggedComponent } from './components/navbar-logged/navbar-logged.
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,14 @@ import { RouterModule } from '@angular/router';
     SearchBarComponent,
     SidebarComponent,
   ],
-  imports: [CommonModule, HttpClientModule, FormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule,
+    CalendarModule,
+    ScheduleModule,
+  ],
   exports: [
     CommonModule,
     SpinnerComponent,
@@ -28,6 +37,8 @@ import { RouterModule } from '@angular/router';
     NavbarLoggedComponent,
     SearchBarComponent,
     SidebarComponent,
+    CalendarModule,
+    ScheduleModule,
   ],
 })
 export class SharedModule {}

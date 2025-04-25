@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<div class="login-body" *ngIf="currentRoute === '/login'">
+  <router-outlet></router-outlet>
+</div>
+<div class="footer-bar" *ngIf="currentRoute === '/login'">
+  <div class="footer-content">
+    <p>© 2025 HealthConnect. All rights reserved.</p>
+  </div>
+</div>
+
+<div *ngIf="currentRoute !== '/login'">
+  <router-outlet></router-outlet>
+</div>

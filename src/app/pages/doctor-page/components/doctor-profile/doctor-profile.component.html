@@ -47,5 +47,18 @@
         <li *ngFor="let org of doctor.affiliations">{{ org }}</li>
       </ul>
     </section>
+  
+    <!-- Socials Section -->
+    <section class="profile-section">
+      <h4>Socials</h4>
+      <div class="social-links">
+        <a *ngIf="doctor.socials.facebook" [href]="doctor.socials.facebook" target="_blank">
+          <img src="/assets/icons/facebook.svg" alt="Facebook" />
+        </a>
+        <a *ngIf="doctor.socials.x" [href]="doctor.socials.x" target="_blank">
+          <img src="/assets/icons/x.svg" alt="X" />
+        </a>
+      </div>
+    </section>
   </div>
   
