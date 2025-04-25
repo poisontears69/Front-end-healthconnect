@@ -1,0 +1,25 @@
+<app-navbar-logged>
+    <div class="left">
+      <button [class.active]="activeTab === 'consultation'" (click)="setTab('consultation')">Consultation</button>
+      <button [class.active]="activeTab === 'my-doctors'" (click)="setTab('my-doctors')">My Doctors</button>
+    </div>
+  
+    <div class="right">
+      <button class="find-btn" [routerLink]="['/patient/search-doctor']">Find a Doctor</button>
+      <button class="settings-btn" [routerLink]="['/patient/profile']" title="Settings">
+        <span class="material-icons">settings</span>
+      </button>
+    </div>
+  </app-navbar-logged>
+  
+  <!-- Doctor Card List -->
+  <div class="doctor-list">
+    <div class="doctor-card" *ngFor="let doctor of dummyDoctors">
+      <h3>{{ doctor.name }}</h3>
+      <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+      <p><strong>Consultation Type:</strong> {{ doctor.consultationType }}</p>
+      <p><strong>Date:</strong> {{ doctor.date }}</p>
+      <p><strong>Patient:</strong> {{ doctor.patient }}</p>
+    </div>
+  </div>
+  

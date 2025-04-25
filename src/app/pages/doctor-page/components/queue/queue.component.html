@@ -1,0 +1,49 @@
+<app-navbar-logged>
+    <div class="left">
+      <h2>Clinic Queue</h2>
+    </div>
+  </app-navbar-logged>
+  
+  <div class="queue-container">
+    <!-- Clinic and Date Selection -->
+    <div class="clinic-date-selection">
+      <div class="clinic-info">
+        <label for="clinicSelect">Select Clinic:</label>
+        <select id="clinicSelect">
+          <option *ngFor="let clinic of clinics">{{ clinic.name }}</option>
+        </select>
+        <div class="address">{{ selectedClinic?.address }}</div>
+      </div>
+      <div class="date-info">
+        <label for="dateSelect">Date:</label>
+        <select id="dateSelect">
+          <option *ngFor="let date of dates">{{ date }}</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Header Section -->
+    <div class="queue-header">
+      <button class="add-btn">
+        <span class="material-icons">add</span>
+      </button>
+      <h3>{{ selectedDate === today ? "Today's Queue" : selectedDate }}</h3>
+      <button class="edit-btn">
+        <span class="material-icons">edit</span>
+      </button>
+    </div>
+  
+    <!-- Patients Queue -->
+    <div class="queue-list">
+      <div 
+        class="queue-card" 
+        *ngFor="let patient of queuedPatients" 
+        [routerLink]="['/doctor/patient-record', patient.id]"
+        style="cursor: pointer;"
+      >
+        <h4>{{ patient.name }}</h4>
+        <p>Status: {{ patient.status }}</p>
+      </div>
+    </div>
+    
+  

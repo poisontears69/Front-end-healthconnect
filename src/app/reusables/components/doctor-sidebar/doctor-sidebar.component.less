@@ -1,0 +1,118 @@
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease;
+    z-index: 1000;
+  
+    &.open {
+      width: 70px;
+  
+      .logo img {
+        width: 40px;
+        margin: auto;
+      }
+  
+      .menu span:not(.material-icons) {
+        display: none;
+      }
+    }
+  
+    .logo {
+      padding: 20px;
+      text-align: center;
+  
+      img {
+        width: 150px;
+        max-width: 100%;
+      }
+    }
+  
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  
+      li {
+        a {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 15px 20px;
+          color: #333;
+          text-decoration: none;
+          font-size: 16px;
+          transition: background 0.2s ease;
+  
+          .material-icons {
+            font-size: 24px;
+            color: #666;
+          }
+  
+          &:hover {
+            background-color: #f0f0f0;
+          }
+  
+          &.active {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  
+    .main-menu {
+      flex-grow: 1;
+    }
+  
+    .secondary-menu {
+      padding-bottom: 20px;
+    }
+  
+    .toggle-btn {
+      position: absolute;
+      top: 50%;
+      right: -20px;
+      transform: translateY(-50%);
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      padding: 6px;
+      cursor: pointer;
+      z-index: 1100;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+      .material-icons {
+        font-size: 20px;
+      }
+  
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+  
+  /* Responsive for smaller screens */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 70px;
+  
+      .label {
+        display: none;
+      }
+  
+      .logo img {
+        width: 40px;
+      }
+  
+      .toggle-btn {
+        display: none;
+      }
+    }
+  }

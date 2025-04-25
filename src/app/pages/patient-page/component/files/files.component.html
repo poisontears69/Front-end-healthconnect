@@ -1,0 +1,29 @@
+<app-navbar-logged>
+    <!-- Left: Tabs -->
+    <div class="left">
+      <button [class.active]="activeTab === 'all'" (click)="setTab('all')">All Files</button>
+      <button [class.active]="activeTab === 'prescriptions'" (click)="setTab('prescriptions')">Prescriptions</button>
+      <button [class.active]="activeTab === 'lab-tests'" (click)="setTab('lab-tests')">Lab Tests</button>
+      <button [class.active]="activeTab === 'notes'" (click)="setTab('notes')">Other Notes</button>
+    </div>
+  
+    <!-- Right: Profile Button -->
+    <div class="right">
+      <button class="settings-btn" [routerLink]="['/patient/profile']" title="Go to Profile">
+        <span class="material-icons">settings</span>
+      </button>
+    </div>
+  </app-navbar-logged>
+  
+  <!-- Search Bar -->
+  <!-- <app-files-search (search)="onSearch($event)"></app-files-search> -->
+  
+  <!-- File Display Grid -->
+  <div class="file-grid">
+    <div class="file-card" *ngFor="let file of filteredFiles">
+      <h4>{{ file.title }}</h4>
+      <p>{{ file.description }}</p>
+      <span>{{ file.date }}</span>
+    </div>
+  </div>
+  

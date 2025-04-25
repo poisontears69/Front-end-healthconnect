@@ -1,0 +1,45 @@
+<nav class="sidebar" [class.open]="isSidebarOpen">
+  <!-- Logo -->
+  <div class="logo">
+    <img src="/hc.ico" alt="HealthConnect Logo" />
+  </div>
+
+  <!-- Main Menu -->
+  <ul class="menu main-menu">
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a routerLink="/patient/home">
+        <span class="material-icons">home</span>
+        <span class="label">Home</span>
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/patient/doctors">
+        <span class="material-icons">local_hospital</span>
+        <span class="label">Doctors</span>
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/patient/messages">
+        <span class="material-icons">chat</span>
+        <span class="label">Messages</span>
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/patient/files">
+        <span class="material-icons">folder</span>
+        <span class="label">Files</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="secondary-menu">
+
+  </ul>
+
+  <!-- Responsive Toggle Arrow -->
+  <button class="toggle-btn" (click)="toggleSidebar()">
+    <span class="material-icons">
+      {{ isSidebarOpen ? 'chevron_right' : 'chevron_left' }}
+    </span>
+  </button>
+</nav>

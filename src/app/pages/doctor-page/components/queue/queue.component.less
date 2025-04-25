@@ -1,0 +1,79 @@
+.queue-container {
+    padding: 20px;
+  
+    .clinic-date-selection {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+  
+      .clinic-info {
+        flex: 1;
+  
+        label {
+          font-weight: bold;
+        }
+  
+        .address {
+          font-size: 14px;
+          color: #666;
+        }
+      }
+  
+      .date-info {
+        label {
+          font-weight: bold;
+        }
+      }
+  
+      select {
+        margin-top: 5px;
+        padding: 5px;
+        font-size: 14px;
+      }
+    }
+  
+    .queue-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+  
+      h3 {
+        margin: 0;
+      }
+  
+      .add-btn, .edit-btn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+  
+        span.material-icons {
+          font-size: 24px;
+          color: #1976d2;
+        }
+      }
+    }
+  
+    .queue-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+  
+      .queue-card {
+        background: #f4f4f4;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  
+        h4 {
+          margin: 0 0 5px 0;
+        }
+  
+        p {
+          margin: 0;
+          color: #666;
+        }
+      }
+    }
+  }
+  

@@ -1,17 +1,29 @@
 import { Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { MainPageComponent } from './pages/main-page/main-page.component';
-import { ClinicPageComponent } from './pages/clinic-page/clinic-page.component';
-import { sessionGuard } from './guards/session.guard';
+import { PublicComponent } from './layouts/public-layout/public.component';
+import { LandingComponent } from './pages/landing-page/landing/landing.component';
 
 export const routes: Routes = [
-  { title: 'HealthConnect', path: '', component: LoginPageComponent },
   {
     title: 'HealthConnect',
-    path: 'home',
-    component: MainPageComponent,
-    canActivate: [sessionGuard],
+    path: '',
+    component: PublicComponent,
+    children: [
+      { path: '', component: LandingComponent },
+      { path: 'login', component: LoginPageComponent },
+    ],
   },
-  { title: 'HealthConnect', path: 'clinic', component: ClinicPageComponent },
-  { path: '**', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: 'patient',
+    loadChildren: () =>
+      import('./pages/patient-page/patient.module').then(
+        (m) => m.PatientModule
+      ),
+  },
+  {
+    path: 'doctor',
+    loadChildren: () =>
+      import('./pages/doctor-page/doctor.module').then((m) => m.DoctorModule),
+  },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];

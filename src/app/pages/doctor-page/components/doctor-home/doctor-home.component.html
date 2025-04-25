@@ -1,0 +1,60 @@
+<app-navbar-logged>
+    <div class="left">
+      <input type="text" placeholder="Search..." class="search-bar" />
+    </div>
+  
+    <div class="right">
+      <button class="add-patient">
+        <span class="material-icons">person_add</span>
+      </button>
+    </div>
+  </app-navbar-logged>
+  
+  <div class="doctor-dashboard">
+  
+    <!-- Profile Section -->
+    <div class="profile-card">
+      <img src="assets/images/doctor-placeholder.png" alt="Doctor Profile" class="profile-img" />
+      <div class="profile-info">
+        <h3>Welcome back to HealthConnect</h3>
+        <h2>Dr. John Doe</h2>
+        <p>Cardiologist</p>
+        <button class="btn outline" [routerLink]="['/doctor/profile']">View your profile</button>
+      </div>
+    </div>
+  
+    <!-- Appointments Section -->
+    <div class="appointments">
+      <div class="header">
+        <h4>Appointments</h4>
+        <select>
+          <option>Today</option>
+          <option>Tomorrow</option>
+          <option>This Week</option>
+        </select>
+      </div>
+      <!-- Placeholder for appointments -->
+      <div class="appointment-placeholder">
+        No appointments available.
+      </div>
+    </div>
+  
+    <!-- Clinics Section -->
+    <div class="clinics-section">
+      <div class="clinic-card" *ngFor="let clinic of clinics">
+        <h4>{{ clinic.name }}</h4>
+        <p>{{ clinic.address }}</p>
+        <div class="clinic-actions">
+          <button class="btn small">View</button>
+          <button class="btn small">Edit</button>
+          <button class="btn small">Schedule</button>
+          <button class="btn small">Remove</button>
+        </div>
+        <div class="patient-count">
+          Patients: {{ clinic.patients }}
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  

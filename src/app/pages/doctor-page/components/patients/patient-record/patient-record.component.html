@@ -1,0 +1,225 @@
+<!-- Top Navbar: Patient Info -->
+<app-navbar-logged>
+    <div class="left patient-info">
+      <img class="patient-avatar" src="https://via.placeholder.com/48" alt="Patient Photo" />
+      <div class="patient-details">
+        <h3>{{ patient.name }}</h3>
+        <p>{{ patient.birthdate }} · {{ patient.age }} yrs · {{ patient.gender }}</p>
+      </div>
+    </div>
+  
+    <div class="right nav-actions">
+      <button class="icon-btn" title="Print" (click)="printRecord()">
+        <span class="material-icons">print</span>
+      </button>
+      <button class="icon-btn" title="Close" (click)="closeRecord()">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+  </app-navbar-logged>
+  
+  <!-- Sub Navigation -->
+  <nav class="sub-nav">
+    <button *ngFor="let tab of tabs" [class.active]="activeTab === tab" (click)="selectTab(tab)">
+      {{ tab }}
+    </button>
+  </nav>
+  
+  <!-- Tab Content Placeholder -->
+  <div class="tab-content">
+    <ng-container [ngSwitch]="activeTab">
+      <!-- PATIENT PROFILE -->
+    <div *ngSwitchCase="'Patient Profile'" class="patient-profile">
+        <form [formGroup]="patientProfileForm" (ngSubmit)="savePatientProfile()">
+          <div class="form-field">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" formControlName="firstName" />
+          </div>
+  
+          <div class="form-field">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" formControlName="lastName" />
+          </div>
+  
+          <div class="form-field">
+            <label for="birthdate">Birthdate</label>
+            <input id="birthdate" type="date" formControlName="birthdate" />
+          </div>
+  
+          <div class="form-field">
+            <label for="gender">Gender</label>
+            <select id="gender" formControlName="gender">
+              <option value="">Select gender</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+  
+          <div class="form-field">
+            <label for="contact">Mobile Number</label>
+            <input id="contact" type="tel" formControlName="contact" />
+          </div>
+  
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" type="email" formControlName="email" />
+          </div>
+  
+          <button type="submit" [disabled]="patientProfileForm.invalid">Save Changes</button>
+        </form>
+      </div>
+
+      <!-- VITALS SECTION -->
+        <div *ngSwitchCase="'Vitals'" class="vitals-section">
+        <!-- Vitals Navbar -->
+        <div class="vitals-navbar">
+            <div class="left">
+            <button class="tab-btn" [class.active]="vitalsView === 'table'" (click)="setVitalsView('table')">Table</button>
+            <button class="tab-btn" [class.active]="vitalsView === 'graph'" (click)="setVitalsView('graph')">Graph</button>
+            </div>
+
+            <div class="right">
+            <button class="action-btn" (click)="addVitals()">Add Vitals</button>
+            <button class="action-btn" (click)="editVitals()">Edit Vitals</button>
+            </div>
+        </div>
+
+        <!-- Filter -->
+        <div class="vitals-filter">
+            <label>View by:</label>
+            <select [(ngModel)]="selectedRange">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+            </select>
+        </div>
+
+        <!-- Table View -->
+        <div class="vitals-table" *ngIf="vitalsView === 'table'">
+            <table>
+            <thead>
+                <tr>
+                <th>Vital Type</th>
+                <th *ngFor="let date of vitalDates">{{ date }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vital of vitalTypes">
+                <td>{{ vital }}</td>
+                <td *ngFor="let date of vitalDates">
+                    <!-- Placeholder value -->
+                    <span>-</span>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+
+        <!-- Graph View (template placeholder) -->
+        <div class="vitals-graph" *ngIf="vitalsView === 'graph'">
+            <p>Graph view coming soon...</p>
+        </div>
+        </div>
+      <!-- DOCTOR'S NOTES -->
+        <div *ngSwitchCase="'Doctor\'s Notes'" class="doctors-notes-section">
+            <h3>Doctor's Notes</h3>
+        
+            <div class="notes-list">
+            <div class="note-card" *ngFor="let note of dummyNotes">
+                <div class="note-header">
+                <span class="note-date">{{ note.date }}</span>
+                <span class="note-time">{{ note.time }}</span>
+                </div>
+                <div class="note-body">
+                <p>{{ note.content }}</p>
+                </div>
+            </div>
+            </div>
+        </div>
+<!-- HEALTH RECORDS -->
+<div *ngSwitchCase="'Health Records'" class="health-records-section">
+    <!-- Top Navbar -->
+    <div class="health-records-navbar">
+      <div class="left-filters">
+        <label>
+          View by Type:
+          <select [(ngModel)]="selectedType">
+            <option value="">All</option>
+            <option value="Lab Result">Lab Result</option>
+            <option value="X-Ray">X-Ray</option>
+            <option value="Prescription">Prescription</option>
+          </select>
+        </label>
+  
+        <label>
+          View by Date:
+          <select [(ngModel)]="selectedDate">
+            <option value="">All Dates</option>
+            <option *ngFor="let date of availableDates" [value]="date">{{ date }}</option>
+          </select>
+        </label>
+      </div>
+  
+      <div class="right-actions">
+        <button class="create-btn">Create Health Record</button>
+      </div>
+    </div>
+  
+    <!-- Health Record Cards -->
+    <div class="health-record-list">
+      <div class="record-card" *ngFor="let record of filteredRecords()">
+        <div class="record-header">
+          <div>
+            <h4>{{ record.type }}</h4>
+            <p class="lab">{{ record.lab }}</p>
+          </div>
+          <button class="edit-btn" title="Edit">
+            <span class="material-icons">edit</span>
+          </button>
+        </div>
+        <div class="record-details">
+          <p><strong>Date:</strong> {{ record.date }}</p>
+          <p><strong>Remarks:</strong> {{ record.remarks }}</p>
+          <div class="file-preview">📎 File/Image Placeholder</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngSwitchCase="'Queue Options'" class="queue-options">
+    <h3>Queue Options</h3>
+  
+    <div *ngIf="hasAppointmentToday; else noAppointment">
+      <label *ngFor="let option of queueOptionsToday">
+        <input
+          type="radio"
+          name="queueAction"
+          [value]="option"
+          [(ngModel)]="selectedAction"
+        />
+        {{ option }}
+      </label>
+    </div>
+  
+    <ng-template #noAppointment>
+      <label *ngFor="let option of queueOptionsNoAppointment">
+        <input
+          type="radio"
+          name="queueAction"
+          [value]="option"
+          [(ngModel)]="selectedAction"
+        />
+        {{ option }}
+      </label>
+    </ng-template>
+  
+    <div class="selected-action" *ngIf="selectedAction">
+      <p><strong>Selected Action:</strong> {{ selectedAction }}</p>
+    </div>
+  </div>
+  
+    </ng-container>
+  </div>
+  

@@ -1,0 +1,170 @@
+.doctor-dashboard {
+  padding: 1.5rem;
+
+  .search-bar {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1rem;
+    width: 200px;
+    transition: border 0.2s ease;
+
+    &:focus {
+      border-color: #1976d2;
+      outline: none;
+    }
+  }
+
+  .add-patient{
+    background: none;
+      border: none;
+      cursor: pointer;
+      
+      .material-icons {
+        font-size: 20px;
+      }
+
+    &:hover {
+      background-color: #1565c0;
+    }
+  }
+
+  .profile-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-right: 1.5rem;
+      object-fit: cover;
+    }
+
+    .profile-info {
+      h3 {
+        margin: 0;
+        font-size: 1rem;
+        color: #888;
+      }
+
+      h2 {
+        margin: 0.2rem 0;
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      p {
+        margin: 0.2rem 0 1rem;
+        color: #555;
+      }
+
+      .btn.outline {
+        background-color: transparent;
+        border: 1px solid #1976d2;
+        color: #1976d2;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: 0.2s ease;
+
+        &:hover {
+          background-color: #e3f2fd;
+        }
+      }
+    }
+  }
+
+  .appointments {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      h4 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      select {
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+      }
+    }
+
+    .appointment-placeholder {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+      padding: 1rem;
+    }
+  }
+
+  .clinics-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .clinic-card {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 320px;
+      flex: 1;
+
+      h4 {
+        margin: 0 0 0.3rem;
+        font-size: 1.2rem;
+        color: #333;
+      }
+
+      p {
+        margin: 0 0 1rem;
+        color: #666;
+      }
+
+      .clinic-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+
+        .btn.small {
+          background-color: #1976d2;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          padding: 0.3rem 0.6rem;
+          font-size: 0.85rem;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #1565c0;
+          }
+        }
+      }
+
+      .patient-count {
+        font-size: 0.9rem;
+        color: #555;
+        font-weight: 500;
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+.settings-container {
+    padding: 24px;
+    max-width: 600px;
+    margin: 0 auto;
+  
+    .settings-section {
+      margin-bottom: 24px;
+  
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+      }
+  
+      .editable-field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+  
+        input {
+          flex: 1;
+          padding: 8px 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+  
+        .icon-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+  
+          span.material-icons {
+            font-size: 20px;
+          }
+  
+          &:hover {
+            color: #007bff;
+          }
+        }
+      }
+    }
+  
+    .logout-btn {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #c62828;
+      }
+    }
+  }
+  

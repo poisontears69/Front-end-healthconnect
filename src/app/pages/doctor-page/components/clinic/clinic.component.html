@@ -1,0 +1,49 @@
+<app-navbar-logged>
+    <div class="left">
+      <h2>Clinic</h2>
+    </div>
+    <div class="right">
+      <button class="icon-btn" [routerLink]="['/doctor/clinic/add']" title="Add Clinic">
+        <span class="material-icons">add</span>
+      </button>
+    </div>
+  </app-navbar-logged>
+  
+  <div class="clinic-list">
+    <div class="clinic-card" *ngFor="let clinic of clinics">
+      <div class="clinic-header">
+        <img [src]="clinic.photoUrl" alt="Clinic Photo" class="clinic-photo" />
+        <div class="clinic-info">
+          <h3>{{ clinic.name }}</h3>
+          <p>{{ clinic.address }}</p>
+        </div>
+        <div class="clinic-menu">
+          <button class="icon-btn" (click)="toggleMenu(clinic)">
+            <span class="material-icons">more_vert</span>
+          </button>
+          <div class="menu-options" *ngIf="clinic.showMenu">
+            <button (click)="editClinic(clinic)">Edit</button>
+            <button (click)="deleteClinic(clinic)">Delete</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="clinic-details">
+        <p><strong>Landmark:</strong> {{ clinic.landmark }}</p>
+        <p><strong>Email:</strong> {{ clinic.email }}</p>
+        <p><strong>Landline:</strong> {{ clinic.landline }}</p>
+        <p><strong>Mobile:</strong> {{ clinic.mobile }}</p>
+        <p><strong>Contact Person:</strong> {{ clinic.contactPerson }}</p>
+      </div>
+  
+      <div class="clinic-schedule">
+        <h4>Clinic Schedule</h4>
+        <ul>
+          <li *ngFor="let sched of clinic.schedule">
+            <span>{{ sched.day }}: {{ sched.time }} ({{ sched.type }})</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

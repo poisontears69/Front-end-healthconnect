@@ -1,0 +1,69 @@
+<nav class="sidebar" [class.open]="isSidebarOpen">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="/hc.ico" alt="HealthConnect Logo" />
+    </div>
+  
+    <!-- Main Menu -->
+    <ul class="menu main-menu">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/doctor/dashboard">
+          <span class="material-icons">dashboard</span>
+          <span class="label">Dashboard</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/doctor/calendar">
+          <span class="material-icons">calendar_today</span>
+          <span class="label">Calendar</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/doctor/queue">
+          <span class="material-icons">queue</span>
+          <span class="label">Queue</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/doctor/patients">
+          <span class="material-icons">groups</span>
+          <span class="label">Patients</span>
+        </a>
+      </li>
+    </ul>
+  
+    <!-- Secondary Menu -->
+    <ul class="menu secondary-menu">
+      <li routerLinkActive="active">
+        <a routerLink="/doctor/messages">
+          <span class="material-icons">message</span>
+          <span class="label">Messages</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/doctor/profile">
+          <span class="material-icons">person</span>
+          <span class="label">Profile</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/doctor/clinic">
+          <span class="material-icons">local_hospital</span>
+          <span class="label">Clinic</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/doctor/settings">
+          <span class="material-icons">settings</span>
+          <span class="label">Settings</span>
+        </a>
+      </li>
+    </ul>
+  
+    <!-- Responsive Toggle Arrow -->
+  <button class="toggle-btn" (click)="toggleSidebar()">
+    <span class="material-icons">
+      {{ isSidebarOpen ? 'chevron_right' : 'chevron_left' }}
+    </span>
+  </button>
+  </nav>

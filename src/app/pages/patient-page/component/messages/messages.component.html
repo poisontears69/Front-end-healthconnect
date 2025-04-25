@@ -1,0 +1,19 @@
+<app-navbar-logged>
+    <div class="left">
+        <button [class.active]="activeTab === 'all-messages'" (click)="setTab('all-messages')">All Messages</button>
+        <button [class.active]="activeTab === 'doctors'" (click)="setTab('doctors')">Doctors</button>
+      </div>
+    
+      <div class="right">
+        <button class="settings-btn" [routerLink]="['/patient/profile']" title="Settings">
+          <span class="material-icons">settings</span>
+        </button>
+      </div>
+</app-navbar-logged>
+
+<div class="messages-container">
+  <div class="no-messages">
+    <h2>No messages found</h2>
+    <p>All messages shared with your doctors will be shown here.</p>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<app-navbar-logged>
+    <div class="left">
+      <h2>Settings</h2>
+    </div>
+  </app-navbar-logged>
+  
+  <div class="settings-container">
+    <!-- Change Email -->
+    <div class="settings-section">
+      <label>Email</label>
+      <div class="editable-field">
+        <input type="email" [(ngModel)]="email" [disabled]="!editEmailMode" />
+        <ng-container *ngIf="!editEmailMode">
+          <button class="icon-btn" (click)="editEmailMode = true">
+            <span class="material-icons">edit</span>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="editEmailMode">
+          <button class="icon-btn" (click)="saveEmail()">
+            <span class="material-icons">check</span>
+          </button>
+          <button class="icon-btn" (click)="cancelEmailEdit()">
+            <span class="material-icons">close</span>
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  
+    <!-- Change Password -->
+    <div class="settings-section">
+      <label>Password</label>
+      <div class="editable-field">
+        <input type="password" [(ngModel)]="password" [disabled]="!editPasswordMode" />
+        <ng-container *ngIf="!editPasswordMode">
+          <button class="icon-btn" (click)="editPasswordMode = true">
+            <span class="material-icons">edit</span>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="editPasswordMode">
+          <button class="icon-btn" (click)="savePassword()">
+            <span class="material-icons">check</span>
+          </button>
+          <button class="icon-btn" (click)="cancelPasswordEdit()">
+            <span class="material-icons">close</span>
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  
+    <!-- Logout -->
+    <div class="settings-section">
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+  

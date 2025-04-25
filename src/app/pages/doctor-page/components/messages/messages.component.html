@@ -1,0 +1,88 @@
+<app-navbar-logged>
+  <div class="left">
+    <h2>Messages</h2>
+  </div>
+</app-navbar-logged>
+
+<div class="messages-page">
+  <!-- Sidebar with Contacts -->
+  <div class="messages-sidebar">
+    <div class="search-bar">
+      <input type="text" placeholder="Search chats..." [(ngModel)]="searchQuery" />
+      <button (click)="createConversation()">New Conversation</button>
+    </div>
+
+    <div class="contact" *ngFor="let contact of filteredContacts()">
+      <div class="avatar"></div>
+      <div class="contact-info">
+        <h4>{{ contact.name }}</h4>
+        <p>{{ contact.lastMessage }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Section -->
+  <div class="chat-section">
+    <!-- Chat Navbar -->
+    <div class="chat-navbar">
+      <h3>{{ selectedChat?.name || 'Select a conversation' }}</h3>
+      <div class="chat-actions">
+        <button><span class="material-icons">call</span></button>
+        <button><span class="material-icons">videocam</span></button>
+      </div>
+    </div>
+
+    <!-- Chat Timeline -->
+    <div class="chat-timeline">
+      <div class="message" *ngFor="let msg of messages">
+        <div [ngClass]="{ 'sent': msg.sent, 'received': !msg.sent }">
+          <p>{{ msg.text }}</p>
+          <span class="timestamp">{{ msg.timestamp }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Bar -->
+    <div class="chat-input-bar">
+      <input type="file" id="fileUpload" hidden (change)="onFileSelected($event)" />
+      <button class="file-btn" (click)="triggerFileUpload()">
+        <span class="material-icons">attach_file</span>
+      </button>
+      <input type="text" placeholder="Type a message..." [(ngModel)]="newMessage" />
+      <button class="send-btn" (click)="sendMessage()">
+        <span class="material-icons">send</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Chat Options Sidebar -->
+  <div class="chat-options">
+    <h4>Options</h4>
+
+    <div class="dropdown">
+      <label>Members</label>
+      <select>
+        <option *ngFor="let member of selectedChat?.members">{{ member }}</option>
+      </select>
+    </div>
+
+    <div class="dropdown">
+      <label>Media / Files / Links</label>
+      <select>
+        <option value="media">Media</option>
+        <option value="files">Files</option>
+        <option value="links">Links</option>
+      </select>
+    </div>
+
+    <div class="media-cards">
+      <div class="media-card" *ngFor="let item of mediaItems">
+        <div class="thumbnail"></div>
+        <div class="details">
+          <p>{{ item.name }}</p>
+          <small>{{ item.date }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

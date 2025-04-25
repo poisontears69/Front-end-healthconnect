@@ -1,0 +1,70 @@
+<app-navbar-logged>
+    <div class="left">
+      <button class="icon-btn" (click)="goBack()">
+        <span class="material-icons">arrow_back</span>
+      </button>
+    </div>
+  
+    <div class="center">
+      <h3>Account</h3>
+    </div>
+  
+    <div class="right">
+      <ng-container *ngIf="!editMode; else editing">
+        <button class="icon-btn" (click)="toggleEdit()">
+          <span class="material-icons">edit</span>
+        </button>
+      </ng-container>
+      <ng-template #editing>
+        <button class="icon-btn" (click)="saveChanges()" title="Save">
+          <span class="material-icons">check</span>
+        </button>
+        <button class="icon-btn" (click)="cancelEdit()" title="Cancel">
+          <span class="material-icons">close</span>
+        </button>
+      </ng-template>
+    </div>
+  </app-navbar-logged>
+  
+  <div class="profile-form">
+    <div class="form-field">
+      <label>First Name</label>
+      <input type="text" [(ngModel)]="formData.firstName" [disabled]="!editMode" />
+    </div>
+  
+    <div class="form-field">
+      <label>Middle Name</label>
+      <input type="text" [(ngModel)]="formData.middleName" [disabled]="!editMode" />
+    </div>
+  
+    <div class="form-field">
+      <label>Last Name</label>
+      <input type="text" [(ngModel)]="formData.lastName" [disabled]="!editMode" />
+    </div>
+  
+    <div class="form-field">
+      <label>Birthdate</label>
+      <input type="date" [(ngModel)]="formData.birthdate" [disabled]="!editMode" />
+    </div>
+  
+    <div class="form-field with-action">
+      <label>Mobile Number</label>
+      <div class="input-action">
+        <input type="tel" [(ngModel)]="formData.mobile" [disabled]="!editMode" />
+        <button class="action-btn" *ngIf="editMode">Change</button>
+      </div>
+    </div>
+  
+    <div class="form-field with-action">
+      <label>Email</label>
+      <div class="input-action">
+        <input type="email" [(ngModel)]="formData.email" [disabled]="!editMode" />
+        <button class="action-btn" *ngIf="editMode">{{ formData.email ? 'Change' : 'Add' }}</button>
+      </div>
+    </div>
+  
+    <hr class="divider" />
+  
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+  

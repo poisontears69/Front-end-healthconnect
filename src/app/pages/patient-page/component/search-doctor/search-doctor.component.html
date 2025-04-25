@@ -1,0 +1,126 @@
+<div class="search-doctor">
+    <!-- Search Controls -->
+    <div class="search-controls">
+      <!-- Search Bar -->
+      <input type="text" placeholder="Search for a doctor..." [(ngModel)]="searchQuery" />
+  
+      <!-- Location Dropdown -->
+      <select [(ngModel)]="selectedLocation">
+        <option value="" disabled selected>Select Location</option>
+        <option value="New York">New York</option>
+        <option value="Los Angeles">Los Angeles</option>
+        <option value="Chicago">Chicago</option>
+        <!-- Add more locations -->
+      </select>
+  
+      <!-- Filter Button -->
+      <button (click)="openFilterModal()">Filters</button>
+    </div>
+  
+    <!-- Display Active Filters -->
+    <div class="active-filters" *ngIf="searchQuery || selectedLocation || selectedFilters.length">
+      <strong>Active Filters:</strong>
+      <span *ngIf="searchQuery">Query: "{{ searchQuery }}"</span>
+      <span *ngIf="selectedLocation">Location: {{ selectedLocation }}</span>
+      <span *ngFor="let filter of selectedFilters">• {{ filter }}</span>
+    </div>
+  
+    <!-- Specialties Section -->
+    <div class="specialties-section">
+      <div class="specialty-card">
+        <h4>Cardiology</h4>
+        <p>Specialists in heart diseases</p>
+      </div>
+      <div class="specialty-card">
+        <h4>Dermatology</h4>
+        <p>Specialists in skin conditions</p>
+      </div>
+      <div class="specialty-card">
+        <h4>Pediatrics</h4>
+        <p>Specialists in child health</p>
+      </div>
+    </div>
+  
+    <!-- Symptoms Section -->
+    <div class="symptoms-section">
+      <h3>Common Symptoms</h3>
+      <div class="symptom-card">
+        <h5>Fever</h5>
+        <p>Feeling of warmth, often with chills</p>
+      </div>
+      <div class="symptom-card">
+        <h5>Cough</h5>
+        <p>A common symptom of respiratory issues</p>
+      </div>
+      <div class="symptom-card">
+        <h5>Headache</h5>
+        <p>Pain or discomfort in the head region</p>
+      </div>
+    </div>
+  
+    <!-- Filter Modal Template -->
+<div class="modal-backdrop" *ngIf="showFilterModal" (click)="closeFilterModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h4>Filter Options</h4>
+  
+      <!-- Placeholder content -->
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h4>Filter Options</h4>
+      
+        <!-- Specialty Dropdown -->
+        <div class="form-group">
+          <label>Specialty</label>
+          <select [(ngModel)]="filterValues.specialty">
+            <option value="">Select specialty</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <!-- Add more specialties as needed -->
+          </select>
+        </div>
+      
+        <!-- Availability (Date Picker) -->
+        <div class="form-group">
+          <label>Availability</label>
+          <input type="date" [(ngModel)]="filterValues.availability" />
+        </div>
+      
+        <!-- Time Preference -->
+        <div class="form-group">
+          <label>Time Preference</label>
+          <div class="radio-group">
+            <label><input type="radio" name="time" [(ngModel)]="filterValues.timePreference" value="Morning" /> Morning</label>
+            <label><input type="radio" name="time" [(ngModel)]="filterValues.timePreference" value="Noon" /> Noon</label>
+            <label><input type="radio" name="time" [(ngModel)]="filterValues.timePreference" value="Evening" /> Evening</label>
+          </div>
+        </div>
+      
+        <!-- Consultation Type -->
+        <div class="form-group">
+          <label>Consultation Type</label>
+          <label><input type="checkbox" [(ngModel)]="filterValues.consultation.online" /> Online</label>
+          <label><input type="checkbox" [(ngModel)]="filterValues.consultation.physical" /> Physical</label>
+        </div>
+      
+        <!-- Optional Location -->
+        <div class="form-group">
+          <label>Location</label>
+          <select [(ngModel)]="filterValues.location">
+            <option value="">Select Location</option>
+            <option value="New York">New York</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Chicago">Chicago</option>
+          </select>
+        </div>
+      
+        <!-- Buttons -->
+        <div class="modal-actions">
+          <button class="apply-btn" (click)="applyFilterValues()">Apply Filters</button>
+          <button class="close-btn" (click)="closeFilterModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  

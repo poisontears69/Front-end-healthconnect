@@ -1,0 +1,51 @@
+<app-navbar-logged>
+    <div class="left">
+      <h2>Doctor Profile</h2>
+    </div>
+  
+    <div class="right">
+      <button class="icon-btn" (click)="editMode = !editMode">
+        <span class="material-icons">{{ editMode ? 'close' : 'edit' }}</span>
+      </button>
+    </div>
+  </app-navbar-logged>
+  
+  <div class="doctor-profile">
+    <!-- Basic Profile Section -->
+    <section class="profile-header">
+      <h3>{{ doctor.name }}</h3>
+      <p class="specialization">{{ doctor.specialization }}</p>
+      <p class="bio">{{ doctor.bio }}</p>
+    </section>
+  
+    <!-- Specialty Section -->
+    <section class="profile-section">
+      <h4>Specialties</h4>
+      <p><strong>Main Specialty:</strong> {{ doctor.mainSpecialty }}</p>
+      <p><strong>Subspecialty:</strong> {{ doctor.subSpecialty }}</p>
+    </section>
+  
+    <!-- Education Section -->
+    <section class="profile-section">
+      <h4>Education</h4>
+      <p><strong>Medical School:</strong> {{ doctor.medSchool }} ({{ doctor.medSchoolYear }})</p>
+      <p><strong>Residency:</strong> {{ doctor.residency }}</p>
+      <p><strong>Fellowship Training:</strong> {{ doctor.fellowship }}</p>
+    </section>
+  
+    <!-- Certifications Section -->
+    <section class="profile-section">
+      <h4>Certifications</h4>
+      <p><strong>Local Board:</strong> {{ doctor.localBoard }}</p>
+      <p><strong>International Board:</strong> {{ doctor.intlBoard }}</p>
+    </section>
+  
+    <!-- Affiliations Section -->
+    <section class="profile-section">
+      <h4>Affiliations / Medical Organizations</h4>
+      <ul>
+        <li *ngFor="let org of doctor.affiliations">{{ org }}</li>
+      </ul>
+    </section>
+  </div>
+  

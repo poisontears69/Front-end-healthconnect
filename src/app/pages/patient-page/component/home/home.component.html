@@ -1,0 +1,38 @@
+<app-navbar-logged>
+  <!-- Left side: User name -->
+  <div class="left">
+    <div class="user-name">Welcome, John!</div>
+  </div>
+
+  <!-- Right side: Settings icon -->
+  <div class="right">
+    <button class="profile-btn" [routerLink]="['/patient/profile']" title="Settings">
+      <span class="material-icons">settings</span>
+    </button>
+  </div>
+</app-navbar-logged>
+
+<!-- Consult Card -->
+<div class="consult-card">
+  <h2>Consult a Doctor Now</h2>
+  <p>Instantly connect with a healthcare professional at your convenience.</p>
+  <button class="consult-btn" [routerLink]="['/patient/search-doctor']">Start Consultation</button>
+</div>
+
+<!-- Explore Section -->
+<div class="explore-section">
+  <h3>Explore</h3>
+  <div class="explore-card" (click)="openBookingInstructions()">
+    <h4>Booking Instructions</h4>
+    <p>Learn how to schedule appointments step-by-step.</p>
+  </div>
+</div>
+
+<!-- Modal Template -->
+<div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h4>Booking Instructions</h4>
+    <p>This is a placeholder for your modal content.</p>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<app-navbar-logged>
+    <div class="left">
+      <h2>Patients</h2>
+    </div>
+    <div class="right">
+      <button class="add-patient" (click)="addPatient()">
+        <span class="material-icons">person_add</span>
+      </button>
+    </div>
+  </app-navbar-logged>
+  
+  <div class="patients-page">
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Search patients..."
+        [(ngModel)]="searchQuery"
+        (input)="filterPatients()"
+      />
+    </div>
+  
+    <div class="patient-group" *ngFor="let group of sortedPatients">
+      <h4 class="group-header">{{ group.letter }}</h4>
+      <div *ngFor="let patient of group.patients" class="patient-card">
+        {{ patient.name }}
+      </div>
+    </div>
+  </div>
+  
