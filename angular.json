@@ -35,9 +35,7 @@
             "styles": [
               "@angular/material/prebuilt-themes/purple-green.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "src/styles.less",
-              "node_modules/@syncfusion/ej2-base/styles/material.css",
-              "node_modules/@syncfusion/ej2-angular-calendars/styles/material.css"
+              "src/styles.less"
             ],
             "scripts": []
           },
