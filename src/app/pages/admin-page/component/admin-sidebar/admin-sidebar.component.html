@@ -1,0 +1,17 @@
+<!-- admin-sidebar.component.html -->
+<div class="sidebar" [class.collapsed]="isCollapsed">
+  <button class="toggle-button" (click)="toggleSidebar()">☰</button>
+
+  <nav class="menu">
+    <a 
+      *ngFor="let item of menuItems" 
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="menu-item"
+    >
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
+    </a>
+  </nav>
+</div>

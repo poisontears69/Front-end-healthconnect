@@ -18,6 +18,13 @@ export const routes: Routes = [
     component: LoginPageComponent,
   },
   {
+    path: 'admin',
+    loadChildren: () =>
+      import('./pages/admin-page/admin-page.module').then(
+        (m) => m.AdminPageModule
+      ),
+  },
+  {
     path: 'patient',
     loadChildren: () =>
       import('./pages/patient-page/patient.module').then(

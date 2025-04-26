@@ -1,0 +1,13 @@
+<div class="modal-container">
+    <h2>Review Doctor</h2>
+  
+    <p><strong>Name:</strong> {{ doctor.name }}</p>
+    <p><strong>Submitted:</strong> {{ doctor.submittedDate | date:'medium' }}</p>
+  
+    <div class="modal-actions">
+      <button mat-button color="primary" (click)="verifyDoctor()">Verify</button>
+      <button mat-button color="warn" (click)="rejectDoctor()">Reject</button>
+      <button mat-button (click)="close()">Close</button>
+    </div>
+  </div>
+  

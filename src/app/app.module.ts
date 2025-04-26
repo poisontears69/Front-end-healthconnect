@@ -35,6 +35,7 @@ import { ProfileDetailsComponent } from './pages/patient-page/component/profile/
 import { ProfileComponent } from './pages/patient-page/component/profile/profile.component';
 import { SearchDoctorComponent } from './pages/patient-page/component/search-doctor/search-doctor.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AdminSidebarComponent } from "./pages/admin-page/component/admin-sidebar/admin-sidebar.component";
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-  ],
+    AdminSidebarComponent
+],
   providers: [CookieService, provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })

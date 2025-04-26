@@ -1,1 +1,8 @@
-<p>admin-dashboard works!</p>
+<div class="layout">
+  <app-admin-sidebar (toggleCollapse)="onSidebarToggled($event)"></app-admin-sidebar>
+
+  <div class="main-content" [class.collapsed]="isSidebarCollapsed">
+    <router-outlet></router-outlet> 
+    <!-- or if you are not using router yet, you can just put <app-dashboard> -->
+  </div>
+</div>

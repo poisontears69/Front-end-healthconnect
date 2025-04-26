@@ -1,0 +1,51 @@
+<div class="verify-doctor-container">
+  <h2>Doctor Verification</h2>
+
+  <div class="doctor-columns">
+    <!-- Pending Column -->
+    <div class="doctor-column">
+      <h3>Pending</h3>
+      <div class="doctor-card" *ngFor="let doctor of pendingDoctors">
+        <h4>{{ doctor.name }}</h4>
+        <p>Submitted: {{ doctor.submittedDate | date: 'mediumDate' }}</p>
+        <button mat-raised-button color="primary" (click)="openReviewModal(doctor)">Review</button>
+      </div>
+    </div>
+
+    <!-- Verified Column -->
+    <div class="doctor-column">
+      <h3>Verified</h3>
+      <div class="doctor-card" *ngFor="let doctor of verifiedDoctors">
+        <h4>{{ doctor.name }}</h4>
+        <p>Verified on: {{ doctor.submittedDate | date: 'mediumDate' }}</p>
+        <button mat-raised-button color="warn" (click)="blacklistDoctor(doctor)">Blacklist</button>
+      </div>
+    </div>
+
+    <!-- Blacklisted Column -->
+    <div class="doctor-column">
+      <h3>Blacklisted</h3>
+      <div class="doctor-card" *ngFor="let doctor of blacklistedDoctors">
+        <h4>{{ doctor.name }}</h4>
+        <p>Blacklisted on: {{ doctor.submittedDate | date: 'mediumDate' }}</p>
+        <button mat-raised-button color="accent" (click)="reinstateDoctor(doctor)">Reinstate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Modal -->
+  <div class="modal-backdrop" *ngIf="selectedDoctor">
+    <div class="modal">
+      <h3>Review Doctor</h3>
+      <p><strong>Name:</strong> {{ selectedDoctor.name }}</p>
+      <p><strong>Email:</strong> {{ selectedDoctor.email }}</p>
+      <p><strong>Submitted:</strong> {{ selectedDoctor.submittedDate | date: 'medium' }}</p>
+
+      <div class="modal-actions">
+        <button mat-button color="primary" (click)="verifyDoctor(selectedDoctor)">Verify</button>
+        <button mat-button color="warn" (click)="blacklistDoctor(selectedDoctor)">Blacklist</button>
+        <button mat-button (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
