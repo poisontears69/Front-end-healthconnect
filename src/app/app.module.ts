@@ -36,6 +36,9 @@ import { ProfileComponent } from './pages/patient-page/component/profile/profile
 import { SearchDoctorComponent } from './pages/patient-page/component/search-doctor/search-doctor.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AdminSidebarComponent } from "./pages/admin-page/component/admin-sidebar/admin-sidebar.component";
+import { MatInputModule } from '@angular/material/input'; // Import MatInput for form fields
+import { MatButtonModule } from '@angular/material/button'; // Import MatButton for buttons
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -76,7 +79,10 @@ import { AdminSidebarComponent } from "./pages/admin-page/component/admin-sideba
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    AdminSidebarComponent
+    AdminSidebarComponent,
+    MatInputModule,           // Input fields
+    MatButtonModule,          // Button
+    MatFormFieldModule,
 ],
   providers: [CookieService, provideAnimationsAsync()],
   bootstrap: [AppComponent],
